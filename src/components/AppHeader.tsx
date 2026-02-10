@@ -41,56 +41,18 @@ function AppHeader({ showProgress = false, completedSteps = 0, totalSteps = 0 }:
                     📊 統計
                 </button>
                 {user && (
-                    <div className="user-area" style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        marginLeft: '8px',
-                    }}>
-                        <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '6px',
-                            background: 'rgba(255, 255, 255, 0.08)',
-                            borderRadius: '8px',
-                            padding: '4px 10px',
-                        }}>
-                            <div style={{
-                                width: '24px',
-                                height: '24px',
-                                borderRadius: '50%',
-                                background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                fontSize: '0.7rem',
-                                color: 'white',
-                                fontWeight: 700,
-                            }}>
+                    <div className="user-area">
+                        <div className="user-profile-chip">
+                            <div className="user-avatar">
                                 {username.charAt(0).toUpperCase()}
                             </div>
-                            <span style={{
-                                color: '#e2e8f0',
-                                fontSize: '0.8rem',
-                                fontWeight: 600,
-                            }}>
+                            <span className="user-name">
                                 {username}
                             </span>
                         </div>
                         <button
                             onClick={handleSignOut}
                             className="logout-btn"
-                            style={{
-                                padding: '4px 10px',
-                                background: 'rgba(239, 68, 68, 0.1)',
-                                border: '1px solid rgba(239, 68, 68, 0.2)',
-                                borderRadius: '6px',
-                                color: '#fca5a5',
-                                cursor: 'pointer',
-                                fontSize: '0.75rem',
-                                fontWeight: 600,
-                                transition: 'all 0.2s',
-                            }}
                         >
                             ログアウト
                         </button>

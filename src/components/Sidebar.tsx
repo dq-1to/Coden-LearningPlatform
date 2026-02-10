@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Step, Course } from '../types';
 import { courses } from '../data/steps';
 
@@ -11,10 +11,20 @@ interface SidebarProps {
 
 function Sidebar({ steps, currentStepId, onStepSelect, completedSteps }: SidebarProps) {
     const [expandedCourse, setExpandedCourse] = useState<string | null>(() => {
-        // 現在のステップのコースを初期値として展開
         const currentStep = steps.find(s => s.id === currentStepId);
         return currentStep?.courseId || 'fundamentals';
     });
+    const activeStepRef = useRef<HTMLLIElement>(null);
+
+    // アクティブステップにスクロール追従
+    useEffect(() => {
+        if (activeStepRef.current) {
+            activeStepRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+            });
+        }
+    }, [currentStepId]);
 
     // コースごとにステップをグループ化
     const getStepsByCourse = (courseId: string) => {
@@ -42,6 +52,9 @@ function Sidebar({ steps, currentStepId, onStepSelect, completedSteps }: Sidebar
                     const progress = getCourseProgress(course.id);
                     const isExpanded = expandedCourse === course.id;
                     const isComplete = progress.completed === progress.total && progress.total > 0;
+                    const progressPercent = progress.total > 0
+                        ? Math.round((progress.completed / progress.total) * 100)
+                        : 0;
 
                     return (
                         <div key={course.id} className="course-group">
@@ -56,6 +69,12 @@ function Sidebar({ steps, currentStepId, onStepSelect, completedSteps }: Sidebar
                                         <span className="course-progress-text">
                                             {progress.completed}/{progress.total} 完了
                                         </span>
+                                        <div className="course-progress-bar">
+                                            <div
+                                                className="course-progress-fill"
+                                                style={{ width: `${progressPercent}%` }}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                                 <span className={`expand-icon ${isExpanded ? 'rotated' : ''}`}>▼</span>
@@ -70,6 +89,7 @@ function Sidebar({ steps, currentStepId, onStepSelect, completedSteps }: Sidebar
                                         return (
                                             <li
                                                 key={step.id}
+                                                ref={isActive ? activeStepRef : null}
                                                 className={`step-item ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`}
                                                 onClick={() => onStepSelect(step.id)}
                                             >

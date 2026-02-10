@@ -13,6 +13,7 @@ import {
 } from '../components/dashboard';
 import { steps, courses, getCourseById } from '../data/steps';
 import { useStats } from '../context/StatsContext';
+import { useAuth } from '../hooks/useAuth';
 import { DailyGoal } from '../types';
 
 // 学習進捗のlocalStorageキー
@@ -21,6 +22,8 @@ const PROGRESS_KEY = 'learning-progress';
 function Dashboard() {
     const navigate = useNavigate();
     const { stats } = useStats();
+    const { user } = useAuth();
+    const userName = user?.user_metadata?.username || user?.email?.split('@')[0] || 'ユーザー';
 
     const [completedSteps] = useState<string[]>(() => {
         const saved = localStorage.getItem(PROGRESS_KEY);
@@ -85,7 +88,7 @@ function Dashboard() {
                     <div className="dashboard-layout">
                         <div className="dashboard-main">
                             <WelcomeBanner
-                                userName="ユーザー"
+                                userName={userName}
                                 completedSteps={completedSteps.length}
                                 totalSteps={steps.length}
                             />
