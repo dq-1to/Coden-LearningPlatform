@@ -1,7 +1,8 @@
-// 自由記述チャレンジエリア
 import { useState } from 'react';
 import CodeEditor from './CodeEditor';
 import { challenges } from '../data/challenges';
+import { useAuth } from '../hooks/useAuth';
+import { submissionService } from '../services/submissionService';
 
 interface ChallengeAreaProps {
     stepId: string;
@@ -9,12 +10,14 @@ interface ChallengeAreaProps {
 }
 
 function ChallengeArea({ stepId, onComplete }: ChallengeAreaProps) {
+    const { user } = useAuth();
     const challenge = challenges[stepId];
     const [code, setCode] = useState(challenge?.initialCode || '');
     const [showHints, setShowHints] = useState(false);
     const [hintIndex, setHintIndex] = useState(0);
     const [showSolution, setShowSolution] = useState(false);
     const [result, setResult] = useState<{ passed: boolean; details: string[] } | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     if (!challenge) {
         return (
@@ -38,7 +41,7 @@ function ChallengeArea({ stepId, onComplete }: ChallengeAreaProps) {
     }
 
     // コードチェック
-    const checkCode = () => {
+    const checkCode = async () => {
         const passed: string[] = [];
         const failed: string[] = [];
 
@@ -55,6 +58,23 @@ function ChallengeArea({ stepId, onComplete }: ChallengeAreaProps) {
             passed: allPassed,
             details: [...passed, ...failed]
         });
+
+        if (user) {
+            setIsSubmitting(true);
+            try {
+                await submissionService.saveSubmission(user.id, {
+                    challengeId: stepId,
+                    code,
+                    status: allPassed ? 'passed' : 'failed',
+                    errorMessage: failed.join('\n'),
+                    executionTime: 0 // Mock execution time
+                });
+            } catch (error) {
+                console.error('Submission failed:', error);
+            } finally {
+                setIsSubmitting(false);
+            }
+        }
 
         if (allPassed) {
             setTimeout(() => onComplete(), 1500);
@@ -130,19 +150,20 @@ function ChallengeArea({ stepId, onComplete }: ChallengeAreaProps) {
             {/* アクションボタン */}
             <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', flexWrap: 'wrap' }}>
                 <button
-                    onClick={checkCode}
+                    onClick={isSubmitting ? undefined : checkCode}
+                    disabled={isSubmitting}
                     style={{
                         padding: '10px 24px',
-                        background: '#4f46e5',
+                        background: isSubmitting ? '#94a3b8' : '#4f46e5',
                         color: 'white',
                         border: 'none',
                         borderRadius: '8px',
-                        cursor: 'pointer',
+                        cursor: isSubmitting ? 'not-allowed' : 'pointer',
                         fontWeight: 'bold',
                         fontSize: '0.9rem'
                     }}
                 >
-                    ▶️ コードチェック
+                    {isSubmitting ? '⏳ チェック中...' : '▶️ コードチェック'}
                 </button>
                 <button
                     onClick={showNextHint}

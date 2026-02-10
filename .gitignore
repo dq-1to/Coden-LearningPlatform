@@ -16,9 +16,20 @@ dist-ssr
 .vscode/*
 !.vscode/extensions.json
 .idea
+# OS generated files
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# TypeScript
+*.tsbuildinfo
+
+# Credentials
+.env
+.env.local
+.env.*.local
+docs/memo.txt

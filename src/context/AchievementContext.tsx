@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Achievement, AchievementContextType } from '../types';
+import { useAuth } from '../hooks/useAuth';
+import { achievementService } from '../services/achievementService';
 
 // 利用可能な実績の定義
 export const ACHIEVEMENTS: Achievement[] = [
@@ -35,7 +37,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     },
 ];
 
-const ACHIEVEMENTS_KEY = 'learning-achievements';
+
+
 
 const AchievementContext = createContext<AchievementContextType | null>(null);
 
@@ -44,21 +47,25 @@ interface AchievementProviderProps {
 }
 
 export function AchievementProvider({ children }: AchievementProviderProps) {
+    const { user } = useAuth();
     const [unlockedAchievements, setUnlockedAchievements] = useState<string[]>([]);
     const [newlyUnlocked, setNewlyUnlocked] = useState<string | null>(null);
 
-    // 初回読み込み
+    // Initial load
     useEffect(() => {
-        const saved = localStorage.getItem(ACHIEVEMENTS_KEY);
-        if (saved) {
-            setUnlockedAchievements(JSON.parse(saved));
+        if (!user) {
+            setUnlockedAchievements([]);
+            return;
         }
-    }, []);
 
-    // 保存
-    useEffect(() => {
-        localStorage.setItem(ACHIEVEMENTS_KEY, JSON.stringify(unlockedAchievements));
-    }, [unlockedAchievements]);
+        const loadAchievements = async () => {
+            const ids = await achievementService.getUnlockedAchievements(user.id);
+            setUnlockedAchievements(ids);
+        };
+        loadAchievements();
+    }, [user]);
+
+    // Save effect removed. Usage of service in unlockAchievement.
 
     const unlockAchievement = (id: string) => {
         if (!unlockedAchievements.includes(id)) {
@@ -68,6 +75,10 @@ export function AchievementProvider({ children }: AchievementProviderProps) {
                 setNewlyUnlocked(id);
                 // 3秒後に通知をクリア
                 setTimeout(() => setNewlyUnlocked(null), 3000);
+
+                if (user) {
+                    achievementService.unlockAchievement(user.id, id);
+                }
             }
         }
     };
