@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { PtContextType, PtEvent } from '../types';
+import { useAuth } from '../hooks/useAuth';
+import { pointService } from '../services/pointService';
 
 const PT_STORAGE_KEY = 'learning-pt';
 
@@ -19,44 +21,42 @@ interface PtProviderProps {
 }
 
 export function PtProvider({ children }: PtProviderProps) {
-    const [pt, setPt] = useState<number>(() => {
-        const saved = localStorage.getItem(PT_STORAGE_KEY);
-        if (saved) {
-            try {
-                return JSON.parse(saved).pt || 0;
-            } catch {
-                return 0;
-            }
-        }
-        return 0;
-    });
+    const { user } = useAuth();
+    const [pt, setPt] = useState<number>(0);
+    const [ptHistory, setPtHistory] = useState<PtEvent[]>([]);
 
-    const [ptHistory, setPtHistory] = useState<PtEvent[]>(() => {
-        const saved = localStorage.getItem(PT_STORAGE_KEY);
-        if (saved) {
-            try {
-                return JSON.parse(saved).history || [];
-            } catch {
-                return [];
-            }
-        }
-        return [];
-    });
-
+    // Fetch initial data
     useEffect(() => {
-        localStorage.setItem(PT_STORAGE_KEY, JSON.stringify({
-            pt,
-            history: ptHistory.slice(-50) // 直近50件のみ保存
-        }));
-    }, [pt, ptHistory]);
+        if (!user) {
+            setPt(0);
+            setPtHistory([]);
+            return;
+        }
 
-    const addPt = (amount: number, reason: string) => {
+        const loadData = async () => {
+            const [totalPt, history] = await Promise.all([
+                pointService.getPt(user.id),
+                pointService.getHistory(user.id)
+            ]);
+            setPt(totalPt);
+            setPtHistory(history);
+        };
+        loadData();
+    }, [user]);
+
+    const addPt = async (amount: number, reason: string) => {
+        // Optimistic update
         setPt(prev => prev + amount);
-        setPtHistory(prev => [...prev, {
+        const newEvent = {
             amount,
             reason,
             timestamp: new Date().toISOString()
-        }]);
+        };
+        setPtHistory(prev => [newEvent, ...prev]);
+
+        if (user) {
+            await pointService.addPt(user.id, amount, reason);
+        }
     };
 
     return (
