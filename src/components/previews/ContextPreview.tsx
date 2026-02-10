@@ -1,0 +1,104 @@
+import { createContext, useContext, useState, ReactNode } from 'react';
+
+// Step6: useContext - グローバルstate、コンテキストAPIを学ぶプレビュー
+
+// テーマコンテキスト
+interface ThemeContextType {
+    theme: 'light' | 'dark';
+    toggleTheme: () => void;
+}
+
+const ThemeContext = createContext<ThemeContextType | null>(null);
+
+// テーマプロバイダー
+function ThemeProvider({ children }: { children: ReactNode }) {
+    const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+    const toggleTheme = () => {
+        setTheme(theme === 'light' ? 'dark' : 'light');
+    };
+
+    return (
+        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+            {children}
+        </ThemeContext.Provider>
+    );
+}
+
+// カスタムフック
+function useTheme() {
+    const context = useContext(ThemeContext);
+    if (!context) {
+        throw new Error('useTheme must be used within ThemeProvider');
+    }
+    return context;
+}
+
+// テーマ表示コンポーネント
+function ThemeDisplay() {
+    const { theme, toggleTheme } = useTheme();
+
+    return (
+        <div
+            className={`theme-display ${theme}`}
+            style={{
+                background: theme === 'dark' ? '#1f2937' : '#f3f4f6',
+                color: theme === 'dark' ? '#f9fafb' : '#111827',
+                padding: '20px',
+                borderRadius: '8px',
+                transition: 'all 0.3s ease'
+            }}
+        >
+            <h4>現在のテーマ: {theme === 'dark' ? '🌙 ダーク' : '☀️ ライト'}</h4>
+            <button
+                onClick={toggleTheme}
+                style={{
+                    background: theme === 'dark' ? '#6366f1' : '#4f46e5',
+                    color: 'white',
+                    border: 'none',
+                    padding: '10px 20px',
+                    borderRadius: '6px',
+                    cursor: 'pointer',
+                    marginTop: '10px'
+                }}
+            >
+                テーマを切り替え
+            </button>
+        </div>
+    );
+}
+
+// 子コンポーネント（Contextの値を使用）
+function NestedComponent() {
+    const { theme } = useTheme();
+
+    return (
+        <div
+            style={{
+                marginTop: '15px',
+                padding: '15px',
+                borderRadius: '6px',
+                background: theme === 'dark' ? '#374151' : '#e5e7eb',
+                color: theme === 'dark' ? '#d1d5db' : '#4b5563'
+            }}
+        >
+            <p>👶 ネストされた子コンポーネント</p>
+            <p style={{ fontSize: '0.85rem', opacity: 0.8 }}>
+                propsを使わずにテーマを取得しています
+            </p>
+        </div>
+    );
+}
+
+function ContextPreview() {
+    return (
+        <div className="preview-content">
+            <ThemeProvider>
+                <ThemeDisplay />
+                <NestedComponent />
+            </ThemeProvider>
+        </div>
+    );
+}
+
+export default ContextPreview;
