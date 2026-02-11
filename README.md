@@ -30,18 +30,15 @@ Coden（コーデン）は、Reactを基礎から応用まで段階的に学べ�
     VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
     ```
 
-2.  **アプリケーションの起動（推奨）**
+3.  **アプリケーションの起動（推奨）**
     フロントエンドとバックエンド（APIサーバー）を同時に起動します。
-    ```bash
-    npm run dev:all
-    ```
     ```bash
     npm run dev:all
     ```
     ブラウザで `http://localhost:5173` にアクセスしてください。
     初回起動時はログイン画面が表示されます。「アカウント登録」からユーザーを作成して開始してください。
 
-3.  **その他のコマンド**
+4.  **その他のコマンド**
     *   `npm run dev`: フロントエンドのみ起動（API連携機能は使えません）
     *   `npm run api`: バックエンド（json-server）のみ起動
     *   `npm run build`: プロダクションビルド
