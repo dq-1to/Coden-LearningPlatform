@@ -3614,29 +3614,7 @@ button:focus-visible {
   position: relative;
 }
 
-.step-item::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: transparent;
-  border-radius: 0 3px 3px 0;
-  transition: background var(--transition-fast);
-}
 
-.step-item.active::before {
-  background: var(--teal-400);
-}
-
-.step-item:hover::before {
-  background: var(--teal-200);
-}
-
-.step-item.active:hover::before {
-  background: var(--teal-400);
-}
 
 /* カード要素ホバー強化 */
 .step-viewer:hover,
@@ -3696,4 +3674,534 @@ button:focus-visible {
 
 .pt-icon {
   font-size: 1.2rem;
+}
+
+/* ===========================================
+   プロフィールページ - Single Column / Bento Layout
+   =========================================== */
+.profile-page {
+  padding: 32px 20px;
+  min-height: calc(100vh - 80px);
+  overflow-y: auto;
+  background: #f7fafc;
+}
+
+.profile-container {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* --- Hero Section --- */
+.profile-hero {
+  /* wrapper for potential animation */
+}
+
+.profile-card {
+  background: linear-gradient(135deg, white 0%, var(--mint-50) 100%);
+  border-radius: var(--radius-xl);
+  padding: 32px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--teal-100);
+  box-shadow: var(--shadow-teal);
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-card::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.gap-24 {
+  gap: 24px;
+}
+
+.profile-avatar-large {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal-400), var(--mint-500));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: white;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
+  flex-shrink: 0;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.profile-username {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--teal-800);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.profile-rank-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 14px;
+  background: var(--mint-100);
+  color: var(--teal-600);
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  align-self: flex-start;
+}
+
+.profile-total-pt-large {
+  text-align: right;
+}
+
+.pt-label {
+  font-size: 0.8rem;
+  color: var(--slate-400);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.pt-value-large {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--warning);
+  line-height: 1;
+}
+
+.pt-value-large .pt-unit {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--slate-400);
+  margin-left: 2px;
+}
+
+/* --- Stats Grid --- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.stat-card-bento {
+  background: white;
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  border: 1px solid var(--slate-100);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.stat-card-bento:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--teal-100);
+}
+
+.stat-icon-large {
+  font-size: 1.6rem;
+  background: var(--mint-50);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+}
+
+.stat-value-large {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--teal-800);
+  line-height: 1.1;
+}
+
+/* --- Content Stack --- */
+.content-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.section-card {
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 28px 32px;
+  border: 1px solid var(--slate-100);
+  box-shadow: var(--shadow-sm);
+}
+
+.section-header {
+  margin-bottom: 20px;
+}
+
+.section-header h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--teal-800);
+  margin: 0 0 4px 0;
+}
+
+.section-header p {
+  color: var(--slate-400);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* --- Split Section (History + Steps side-by-side) --- */
+.split-section {
+  display: flex;
+  gap: 20px;
+}
+
+.flex-1 {
+  flex: 1;
+  min-width: 0;
+}
+
+/* --- Achievements in Profile --- */
+.profile-page .achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.profile-page .achievement-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--slate-100);
+  background: var(--slate-50);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.profile-page .achievement-card.unlocked {
+  background: var(--mint-50);
+  border-color: var(--teal-200);
+}
+
+.profile-page .achievement-card.locked {
+  opacity: 0.5;
+}
+
+.profile-page .achievement-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.profile-page .achievement-details strong {
+  font-size: 0.9rem;
+  color: var(--teal-800);
+}
+
+.profile-page .achievement-details p {
+  font-size: 0.75rem;
+  color: var(--slate-500);
+  margin: 2px 0 0;
+}
+
+.profile-page .unlocked-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: var(--teal-500);
+  color: white;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 900;
+  border: 2px solid white;
+}
+
+/* --- Pt History in Profile --- */
+.profile-page .pt-history-list {
+  display: flex;
+  flex-direction: column;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.profile-page .pt-history-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--slate-100);
+  transition: background var(--transition-fast);
+}
+
+.profile-page .pt-history-item:last-child {
+  border-bottom: none;
+}
+
+.profile-page .pt-history-item:hover {
+  background: var(--slate-50);
+}
+
+.history-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pt-history-reason {
+  font-weight: 600;
+  color: var(--slate-700);
+  font-size: 0.9rem;
+}
+
+.pt-history-amount {
+  font-weight: 800;
+  color: var(--warning);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.pt-history-date {
+  font-size: 0.75rem;
+  color: var(--slate-400);
+}
+
+.no-history {
+  text-align: center;
+  color: var(--slate-400);
+  padding: 32px;
+  font-size: 0.9rem;
+}
+
+/* --- Step Stats in Profile --- */
+.profile-page .step-stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.profile-page .step-stat-item {
+  padding: 14px 16px;
+  background: var(--slate-50);
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast);
+}
+
+.profile-page .step-stat-item:hover {
+  background: var(--mint-50);
+}
+
+.step-stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.step-stat-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--teal-800);
+}
+
+.step-accuracy {
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.step-accuracy.high {
+  background: var(--success-light);
+  color: #065f46;
+}
+
+.step-accuracy.medium {
+  background: var(--warning-light);
+  color: #92400e;
+}
+
+.step-accuracy.low {
+  background: var(--danger-light);
+  color: #991b1b;
+}
+
+.step-stat-details {
+  display: flex;
+  gap: 16px;
+  font-size: 0.8rem;
+  color: var(--slate-500);
+  margin-bottom: 8px;
+}
+
+.step-stat-bar {
+  height: 6px;
+  background: var(--slate-200);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.step-stat-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--teal-400), var(--mint-500));
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+/* --- Mascot in Profile --- */
+.profile-page .mascot-selector {
+  /* override any dashboard-specific styling */
+}
+
+.profile-page .selector-title {
+  display: none;
+  /* section-header handles this */
+}
+
+.profile-page .selector-description {
+  display: none;
+}
+
+.profile-page .mascot-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.profile-page .mascot-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--slate-50);
+  border: 2px solid var(--slate-100);
+  border-radius: var(--radius-lg);
+  padding: 16px 12px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.profile-page .mascot-option:hover {
+  border-color: var(--teal-300);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-sm);
+}
+
+.profile-page .mascot-option.selected {
+  border-color: var(--teal-500);
+  background: var(--mint-50);
+  box-shadow: var(--shadow-teal);
+}
+
+.profile-page .mascot-option-image img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
+.profile-page .mascot-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--teal-800);
+}
+
+.profile-page .mascot-desc {
+  display: none;
+}
+
+.profile-page .selected-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: var(--teal-500);
+  color: white;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 900;
+  border: 2px solid white;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .profile-page {
+    padding: 20px 12px;
+  }
+
+  .profile-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    padding: 24px;
+  }
+
+  .profile-card .d-flex {
+    flex-direction: column;
+  }
+
+  .profile-rank-badge {
+    align-self: center;
+  }
+
+  .profile-total-pt-large {
+    text-align: center;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .split-section {
+    flex-direction: column;
+  }
+
+  .profile-page .mascot-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .profile-page .achievements-grid {
+    grid-template-columns: 1fr;
+  }
 }

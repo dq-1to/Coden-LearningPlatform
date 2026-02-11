@@ -49,8 +49,8 @@ function AppHeader({ showProgress = false, completedSteps = 0, totalSteps = 0, o
                         進捗: {completedSteps} / {totalSteps} 完了
                     </span>
                 )}
-                <button className="stats-btn" onClick={() => navigate('/stats')}>
-                    📊 統計
+                <button className="stats-btn" onClick={() => navigate('/profile')}>
+                    👤 プロフィール
                 </button>
                 {user && (
                     <div className="user-area">

@@ -8,9 +8,8 @@ import {
     LearningStatusCard,
     RecommendedCourses,
     LearningHeatmap,
-    CurrentCourseCard,
-    MascotSelector
-} from '../components/dashboard';
+    CurrentCourseCard
+} from '../components/dashboard'; // Removed MascotSelector
 import { steps, courses, getCourseById } from '../data/steps';
 import { useStats } from '../context/StatsContext';
 import { useAuth } from '../hooks/useAuth';
@@ -112,7 +111,7 @@ function Dashboard() {
                         <div className="dashboard-side">
                             <LearningStatusCard />
 
-                            <MascotSelector />
+                            {/* MascotSelector removed */}
 
                             <RecommendedCourses
                                 courses={courses}
