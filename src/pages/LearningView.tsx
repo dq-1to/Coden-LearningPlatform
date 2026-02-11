@@ -41,6 +41,7 @@ function LearningView() {
 
     // 表示モード: 'view'（閲覧）, 'practice'（練習）, 'test'（ステップテスト）
     const [mode, setMode] = useState<'view' | 'practice' | 'test' | 'challenge'>('view');
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     // 初回読み込み: localStorageから進捗を取得
     useEffect(() => {
@@ -140,6 +141,7 @@ function LearningView() {
                 showProgress={true}
                 completedSteps={completedSteps.length}
                 totalSteps={steps.length}
+                onMenuToggle={() => setIsDrawerOpen(true)}
             />
 
             <div className="app-body">
@@ -148,6 +150,8 @@ function LearningView() {
                     currentStepId={currentStepId}
                     onStepSelect={handleStepSelect}
                     completedSteps={completedSteps}
+                    isDrawerOpen={isDrawerOpen}
+                    onDrawerClose={() => setIsDrawerOpen(false)}
                 />
 
                 <main className="main-content">

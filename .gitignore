@@ -33,3 +33,5 @@ Thumbs.db
 .env.local
 .env.*.local
 docs/memo.txt
+docs/appreview/
+docs/roadmaps/
