@@ -12,7 +12,9 @@ Coden（コーデン）は、Reactを基礎から応用まで段階的に学べ�
     *   🧪 **テストモード**: 実際のコードの穴埋めテストで理解度をチェック。
     *   🏆 **チャレンジモード**: Monaco Editorを使った自由記述課題で実装力を鍛える。
 *   **擬似バックエンド**: `json-server` を統合し、GET/POST/PATCH/DELETEなどのAPI通信を実践的に学習可能。
+*   **Supabase連携**: ユーザー認証と学習データのクラウド同期機能。
 *   **学習ダッシュボード**: 進捗状況、獲得Pt、連続学習日数（ストリーク）を可視化。
+*   **プロフィール管理**: 学習履歴の確認、実績バッジのコレクション機能。
 
 ## 📦 インストールと起動
 
@@ -21,12 +23,23 @@ Coden（コーデン）は、Reactを基礎から応用まで段階的に学べ�
     npm install
     ```
 
+2.  **環境変数の設定**
+    ルートディレクトリに `.env` ファイルを作成し、Supabaseの接続情報を設定します。
+    ```env
+    VITE_SUPABASE_URL=your_supabase_url
+    VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+    ```
+
 2.  **アプリケーションの起動（推奨）**
     フロントエンドとバックエンド（APIサーバー）を同時に起動します。
     ```bash
     npm run dev:all
     ```
+    ```bash
+    npm run dev:all
+    ```
     ブラウザで `http://localhost:5173` にアクセスしてください。
+    初回起動時はログイン画面が表示されます。「アカウント登録」からユーザーを作成して開始してください。
 
 3.  **その他のコマンド**
     *   `npm run dev`: フロントエンドのみ起動（API連携機能は使えません）
@@ -45,6 +58,7 @@ Coden（コーデン）は、Reactを基礎から応用まで段階的に学べ�
 
 *   React 19 + Vite
 *   TypeScript
+*   Supabase (PostgreSQL, Auth)
 *   Monaco Editor (`@monaco-editor/react`)
 *   React Router v7
 *   json-server
