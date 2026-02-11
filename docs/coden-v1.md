@@ -39,17 +39,24 @@
    - キーワード判定による自動採点 + 模範解答の確認
    - 目的: 実装力・応用力の獲得
 
-### 3-2. ダッシュボード & 進捗管理
-- 全19ステップの進捗一覧表示
-- 獲得Pt（経験値）とレベルシステム
-- 連続学習日数（ストリーク）の記録
-- 実績バッジの解除（例：「初チャレンジクリア」「3日連続学習」）
+### 3-2. 学習ダッシュボード & プロフィール
+- **学習ロードマップ**: 全19ステップの進捗を視覚的に管理
+- **デイリーゴール**: 毎日の学習目標（「1ステップ完了」「3問正解」など）と達成状況
+- **プロフィールページ**: 
+    - 獲得Pt（経験値）とランク表示
+    - 学習履歴（ヒートマップ）
+    - 実績バッジ（各実績の解除条件とステータス確認）
+- **学習データのクラウド同期**: Supabase認証による学習データの永続化と同期
 
-### 3-3. 擬似バックエンド環境
-- `json-server` を利用したRESTful API
-- エンドポイント: `/api/counter`, `/api/tasks`
-- 対応メソッド: GET, POST, PATCH, DELETE
-- 役割: 実際のHTTP通信を用いた非同期処理の学習
+### 3-3. 擬似バックエンド & クラウド基盤
+- **RESTful API学習環境**:
+    - `json-server` を利用した擬似API
+    - エンドポイント: `/api/counter`, `/api/tasks`
+    - 学習目的: `fetch` やカスタムフックを使った非同期処理の実践
+- **Supabase連携 (v1.0)**:
+    - ユーザー認証 (Email/Password)
+    - 学習進捗・Pt・実績のクラウド保存
+    - 将来的なマルチデバイス対応の基盤
 
 ---
 
@@ -85,17 +92,18 @@ Reactの基本概念を網羅。
 ## 5. 技術スタック (Tech Stack)
 
 ### Frontend
-- **Framework**: React / Vite
+- **Framework**: React 19 / Vite
 - **Language**: TypeScript
-- **State Management**: React Context (Redux等は未使用)
+- **State Management**: React Context + Hooks
 - **Editor**: Monaco Editor (`@monaco-editor/react`)
 - **Markdown**: `react-markdown`, `remark-gfm`
 - **Routing**: React Router v7
 - **Testing**: Vitest, React Testing Library
-- **Styling**: Pure CSS (CSS Variables)
+- **Styling**: Pure CSS (CSS Variables), Responsive Design
 
-### Backend (Mock)
-- **Server**: json-server
+### Backend / Infrastructure
+- **BaaS**: Supabase (PostgreSQL, GoTrue Auth)
+- **Mock API**: json-server (学習用API)
 - **Runtime**: Node.js
 
 ---
