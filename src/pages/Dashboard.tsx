@@ -24,6 +24,7 @@ function Dashboard() {
     const { stats } = useStats();
     const { user } = useAuth();
     const userName = user?.user_metadata?.username || user?.email?.split('@')[0] || 'ユーザー';
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     const [completedSteps] = useState<string[]>(() => {
         const saved = localStorage.getItem(PROGRESS_KEY);
@@ -74,7 +75,7 @@ function Dashboard() {
 
     return (
         <div className="app">
-            <AppHeader />
+            <AppHeader onMenuToggle={() => setIsDrawerOpen(true)} />
 
             <div className="app-body">
                 <Sidebar
@@ -82,6 +83,8 @@ function Dashboard() {
                     currentStepId={currentStep?.id || steps[0].id}
                     onStepSelect={handleSelectStep}
                     completedSteps={completedSteps}
+                    isDrawerOpen={isDrawerOpen}
+                    onDrawerClose={() => setIsDrawerOpen(false)}
                 />
 
                 <main className="main-content dashboard-content">

@@ -7,9 +7,10 @@ interface AppHeaderProps {
     showProgress?: boolean;
     completedSteps?: number;
     totalSteps?: number;
+    onMenuToggle?: () => void;
 }
 
-function AppHeader({ showProgress = false, completedSteps = 0, totalSteps = 0 }: AppHeaderProps) {
+function AppHeader({ showProgress = false, completedSteps = 0, totalSteps = 0, onMenuToggle }: AppHeaderProps) {
     const navigate = useNavigate();
     const { pt } = usePt();
     const { user, signOut } = useAuth();
@@ -23,9 +24,20 @@ function AppHeader({ showProgress = false, completedSteps = 0, totalSteps = 0 }:
 
     return (
         <header className="app-header">
-            <div className="header-brand" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-                <img src={codenLogo} alt="Coden" className="header-logo" />
-                <h1>Coden</h1>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                {onMenuToggle && (
+                    <button
+                        className="mobile-menu-btn"
+                        onClick={onMenuToggle}
+                        aria-label="メニューを開く"
+                    >
+                        ☰
+                    </button>
+                )}
+                <div className="header-brand" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+                    <img src={codenLogo} alt="Coden" className="header-logo" />
+                    <h1>Coden</h1>
+                </div>
             </div>
             <div className="header-actions">
                 <div className="pt-badge">

@@ -7,9 +7,11 @@ interface SidebarProps {
     currentStepId: string;
     onStepSelect: (stepId: string) => void;
     completedSteps: string[];
+    isDrawerOpen?: boolean;
+    onDrawerClose?: () => void;
 }
 
-function Sidebar({ steps, currentStepId, onStepSelect, completedSteps }: SidebarProps) {
+function Sidebar({ steps, currentStepId, onStepSelect, completedSteps, isDrawerOpen = false, onDrawerClose }: SidebarProps) {
     const [expandedCourse, setExpandedCourse] = useState<string | null>(() => {
         const currentStep = steps.find(s => s.id === currentStepId);
         return currentStep?.courseId || 'fundamentals';
@@ -42,74 +44,96 @@ function Sidebar({ steps, currentStepId, onStepSelect, completedSteps }: Sidebar
         setExpandedCourse(prev => prev === courseId ? null : courseId);
     };
 
-    return (
-        <aside className="sidebar">
-            <div className="sidebar-header">
-                <h2 className="sidebar-title">📚 学習コース</h2>
-            </div>
-            <nav className="course-nav">
-                {courses.map((course: Course) => {
-                    const progress = getCourseProgress(course.id);
-                    const isExpanded = expandedCourse === course.id;
-                    const isComplete = progress.completed === progress.total && progress.total > 0;
-                    const progressPercent = progress.total > 0
-                        ? Math.round((progress.completed / progress.total) * 100)
-                        : 0;
+    const handleStepClick = (stepId: string) => {
+        onStepSelect(stepId);
+        // モバイルではステップ選択時にドロワーを閉じる
+        if (onDrawerClose) {
+            onDrawerClose();
+        }
+    };
 
-                    return (
-                        <div key={course.id} className="course-group">
-                            <button
-                                className={`course-header ${isExpanded ? 'expanded' : ''} ${isComplete ? 'completed' : ''}`}
-                                onClick={() => toggleCourse(course.id)}
-                            >
-                                <div className="course-info">
-                                    <span className="course-icon">{course.icon}</span>
-                                    <div className="course-meta">
-                                        <span className="course-name">{course.title}</span>
-                                        <span className="course-progress-text">
-                                            {progress.completed}/{progress.total} 完了
-                                        </span>
-                                        <div className="course-progress-bar">
-                                            <div
-                                                className="course-progress-fill"
-                                                style={{ width: `${progressPercent}%` }}
-                                            />
+    return (
+        <>
+            {/* オーバーレイ（モバイル用） */}
+            <div
+                className={`sidebar-overlay ${isDrawerOpen ? 'active' : ''}`}
+                onClick={onDrawerClose}
+            />
+            <aside className={`sidebar ${isDrawerOpen ? 'drawer-open' : ''}`}>
+                <div className="sidebar-header">
+                    <h2 className="sidebar-title">📚 学習コース</h2>
+                    <button
+                        className="sidebar-close-btn"
+                        onClick={onDrawerClose}
+                        aria-label="サイドバーを閉じる"
+                    >
+                        ✕
+                    </button>
+                </div>
+                <nav className="course-nav">
+                    {courses.map((course: Course) => {
+                        const progress = getCourseProgress(course.id);
+                        const isExpanded = expandedCourse === course.id;
+                        const isComplete = progress.completed === progress.total && progress.total > 0;
+                        const progressPercent = progress.total > 0
+                            ? Math.round((progress.completed / progress.total) * 100)
+                            : 0;
+
+                        return (
+                            <div key={course.id} className="course-group">
+                                <button
+                                    className={`course-header ${isExpanded ? 'expanded' : ''} ${isComplete ? 'completed' : ''}`}
+                                    onClick={() => toggleCourse(course.id)}
+                                >
+                                    <div className="course-info">
+                                        <span className="course-icon">{course.icon}</span>
+                                        <div className="course-meta">
+                                            <span className="course-name">{course.title}</span>
+                                            <span className="course-progress-text">
+                                                {progress.completed}/{progress.total} 完了
+                                            </span>
+                                            <div className="course-progress-bar">
+                                                <div
+                                                    className="course-progress-fill"
+                                                    style={{ width: `${progressPercent}%` }}
+                                                />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <span className={`expand-icon ${isExpanded ? 'rotated' : ''}`}>▼</span>
-                            </button>
+                                    <span className={`expand-icon ${isExpanded ? 'rotated' : ''}`}>▼</span>
+                                </button>
 
-                            {isExpanded && (
-                                <ul className="step-list">
-                                    {getStepsByCourse(course.id).map((step, index) => {
-                                        const isActive = step.id === currentStepId;
-                                        const isCompleted = completedSteps.includes(step.id);
+                                {isExpanded && (
+                                    <ul className="step-list">
+                                        {getStepsByCourse(course.id).map((step, index) => {
+                                            const isActive = step.id === currentStepId;
+                                            const isCompleted = completedSteps.includes(step.id);
 
-                                        return (
-                                            <li
-                                                key={step.id}
-                                                ref={isActive ? activeStepRef : null}
-                                                className={`step-item ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`}
-                                                onClick={() => onStepSelect(step.id)}
-                                            >
-                                                <span className="step-check">
-                                                    {isCompleted ? '✓' : index + 1}
-                                                </span>
-                                                <div className="step-info">
-                                                    <span className="step-title">{step.title}</span>
-                                                    <span className="step-description">{step.description}</span>
-                                                </div>
-                                            </li>
-                                        );
-                                    })}
-                                </ul>
-                            )}
-                        </div>
-                    );
-                })}
-            </nav>
-        </aside>
+                                            return (
+                                                <li
+                                                    key={step.id}
+                                                    ref={isActive ? activeStepRef : null}
+                                                    className={`step-item ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`}
+                                                    onClick={() => handleStepClick(step.id)}
+                                                >
+                                                    <span className="step-check">
+                                                        {isCompleted ? '✓' : index + 1}
+                                                    </span>
+                                                    <div className="step-info">
+                                                        <span className="step-title">{step.title}</span>
+                                                        <span className="step-description">{step.description}</span>
+                                                    </div>
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                )}
+                            </div>
+                        );
+                    })}
+                </nav>
+            </aside>
+        </>
     );
 }
 

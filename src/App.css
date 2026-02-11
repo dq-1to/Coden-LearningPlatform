@@ -3109,37 +3109,127 @@ body {
    レスポンシブ対応
    =========================================== */
 
+/* ドロワーサイドバー共通 */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  z-index: 200;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+.mobile-menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm);
+  color: #ccfbf1;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.mobile-menu-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-close-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--slate-100);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--slate-500);
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: auto;
+  transition: all var(--transition-fast);
+}
+
+.sidebar-close-btn:hover {
+  background: var(--slate-200);
+  color: var(--slate-700);
+}
+
+/* ラージタブレット: 1024px */
+@media (max-width: 1024px) {
+  .content-right {
+    width: 320px;
+  }
+
+  .dashboard-layout {
+    grid-template-columns: 1fr 280px;
+  }
+
+  .welcome-title {
+    font-size: 1.5rem;
+  }
+
+  .mascot-circle {
+    width: 100px;
+    height: 100px;
+  }
+}
+
 /* タブレット: 768px */
 @media (max-width: 768px) {
+
+  /* ドロワーサイドバー */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 280px;
+    height: 100vh;
+    z-index: 250;
+    border-right: 1px solid var(--slate-200);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    max-height: none;
+    border-bottom: none;
+    padding-top: 16px;
+  }
+
+  .sidebar.drawer-open {
+    left: 0;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .sidebar-close-btn {
+    display: flex;
+  }
+
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    padding: 0 12px 12px;
+  }
+
+  .sidebar-title {
+    margin-bottom: 0;
+  }
+
   .app-body {
     flex-direction: column;
-  }
-
-  .sidebar {
-    width: 100%;
-    max-height: 200px;
-    overflow-y: auto;
-    border-right: none;
-    border-bottom: 1px solid var(--slate-200);
-  }
-
-  .sidebar-steps {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    padding: 8px;
-  }
-
-  .step-item {
-    flex: 0 0 auto;
-    white-space: nowrap;
-    padding: 6px 12px;
-    font-size: 0.8rem;
-  }
-
-  .course-group h3 {
-    padding: 6px 12px;
-    font-size: 0.85rem;
   }
 
   .main-content {
@@ -3150,6 +3240,8 @@ body {
   .content-view,
   .content-test {
     flex-direction: column;
+    padding: 16px;
+    gap: 16px;
   }
 
   .content-left,
@@ -3186,6 +3278,10 @@ body {
     display: none;
   }
 
+  .user-name {
+    display: none;
+  }
+
   .code-block-body {
     font-size: 0.85rem;
   }
@@ -3201,35 +3297,51 @@ body {
   .step-stat-grid {
     grid-template-columns: 1fr;
   }
+
+  .welcome-banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .welcome-badges {
+    justify-content: center;
+  }
+
+  .mode-tabs {
+    padding: 12px 16px;
+    gap: 8px;
+  }
+
+  .mode-tab {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
 }
 
 /* モバイル: 480px */
 @media (max-width: 480px) {
-  .sidebar {
-    max-height: 150px;
-  }
-
-  .sidebar-steps {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-  }
-
   .main-content {
     padding: 12px;
   }
 
   .mode-tabs {
-    flex-direction: column;
+    padding: 8px 12px;
     gap: 4px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
   }
 
   .mode-tab {
-    width: 100%;
-    text-align: center;
+    padding: 10px 12px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-height: 44px;
   }
 
   .app-header {
-    padding: 8px 16px;
+    padding: 8px 12px;
   }
 
   .app-header h1 {
@@ -3247,8 +3359,9 @@ body {
   }
 
   .stats-btn {
-    padding: 6px 10px;
+    padding: 8px 12px;
     font-size: 0.8rem;
+    min-height: 44px;
   }
 
   .stats-grid {
@@ -3259,16 +3372,80 @@ body {
     padding: 20px;
   }
 
-  .welcome-banner h2 {
+  .welcome-title {
     font-size: 1.3rem;
   }
 
-  .daily-goals-grid {
+  .daily-goals-grid,
+  .goals-grid {
     grid-template-columns: 1fr;
   }
 
   .explanation-subtitle {
     font-size: 0.95rem;
+  }
+
+  .step-viewer {
+    padding: 20px;
+  }
+
+  .practice-area {
+    padding: 20px;
+  }
+
+  .content-view {
+    padding: 12px;
+  }
+
+  /* タッチフレンドリー: 最小44pxボタン */
+  .step-item {
+    min-height: 44px;
+    padding: 10px 12px;
+  }
+
+  .course-header {
+    min-height: 48px;
+  }
+
+  .start-practice-btn,
+  .submit-btn,
+  .preview-btn,
+  .complete-btn,
+  .resume-button {
+    min-height: 48px;
+    font-size: 1rem;
+  }
+
+  .logout-btn {
+    min-height: 36px;
+    padding: 6px 10px;
+  }
+
+  /* ダッシュボードカード最適化 */
+  .dashboard-content {
+    padding: 16px;
+  }
+
+  .learning-status-card {
+    padding: 20px;
+  }
+
+  .goal-card {
+    padding: 14px;
+  }
+
+  .heatmap-cell {
+    width: 10px;
+    height: 10px;
+  }
+
+  .mascot-circle {
+    width: 80px;
+    height: 80px;
+  }
+
+  .mascot-face {
+    font-size: 3rem;
   }
 }
 
