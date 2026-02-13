@@ -14,6 +14,7 @@ import { steps, courses, getCourseById } from '../data/steps';
 import { useStats } from '../context/StatsContext';
 import { useAuth } from '../hooks/useAuth';
 import { DailyGoal } from '../types';
+import styles from './Dashboard.module.css';
 
 // 学習進捗のlocalStorageキー
 const PROGRESS_KEY = 'learning-progress';
@@ -86,9 +87,9 @@ function Dashboard() {
                     onDrawerClose={() => setIsDrawerOpen(false)}
                 />
 
-                <main className="main-content dashboard-content">
-                    <div className="dashboard-layout">
-                        <div className="dashboard-main">
+                <main className={`main-content ${styles.dashboardContent}`}>
+                    <div className={styles.dashboardLayout}>
+                        <div className={styles.dashboardMain}>
                             <WelcomeBanner
                                 userName={userName}
                                 completedSteps={completedSteps.length}
@@ -108,7 +109,7 @@ function Dashboard() {
                             <LearningHeatmap />
                         </div>
 
-                        <div className="dashboard-side">
+                        <div className={styles.dashboardSide}>
                             <LearningStatusCard />
 
                             {/* MascotSelector removed */}

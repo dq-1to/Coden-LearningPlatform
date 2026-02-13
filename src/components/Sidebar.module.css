@@ -1,0 +1,340 @@
+/* ===========================================
+   Sidebar - CSS Module
+   =========================================== */
+
+.sidebar {
+  width: 280px;
+  background: white;
+  border-right: 1px solid var(--teal-50);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--teal-200) transparent;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--teal-200);
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--teal-300);
+}
+
+/* Overlay for mobile drawer */
+.sidebarOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  z-index: 200;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebarOverlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* Sidebar header (visible in mobile drawer) */
+.sidebarHeader {
+  display: none;
+  align-items: center;
+  padding: 0 12px 12px;
+}
+
+.sidebarTitle {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--teal-800);
+  margin-bottom: 20px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebarCloseBtn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--slate-100);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--slate-500);
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: auto;
+  transition: all var(--transition-fast);
+}
+
+.sidebarCloseBtn:hover {
+  background: var(--slate-200);
+  color: var(--slate-700);
+}
+
+/* Course navigation */
+.courseNav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.courseGroup {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.courseHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  background: var(--slate-50);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+}
+
+.courseHeader:hover {
+  background: var(--mint-50);
+}
+
+.courseHeader.expanded {
+  background: var(--mint-100);
+}
+
+.courseHeader.completed {
+  background: var(--success-light);
+}
+
+.courseInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.courseIcon {
+  font-size: 1.4rem;
+}
+
+.courseMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.courseName {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--teal-800);
+}
+
+.courseProgressText {
+  font-size: 0.75rem;
+  color: var(--slate-400);
+  font-weight: 500;
+}
+
+.courseProgressBar {
+  width: 100%;
+  height: 4px;
+  background: var(--slate-200);
+  border-radius: 2px;
+  margin-top: 4px;
+  overflow: hidden;
+}
+
+.courseProgressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--teal-400) 0%, var(--mint-500) 100%);
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+.expandIcon {
+  font-size: 0.7rem;
+  color: var(--slate-400);
+  transition: transform var(--transition-fast);
+}
+
+.expandIcon.rotated {
+  transform: rotate(180deg);
+}
+
+/* Step list */
+.stepList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: white;
+  padding: 8px;
+  animation: slideDown 0.25s ease-out;
+}
+
+/* Step item */
+.stepItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  margin-left: 16px;
+  border-left: 2px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color: var(--slate-400);
+  position: relative;
+}
+
+.stepItem:hover {
+  background: var(--mint-50);
+  color: var(--teal-600);
+}
+
+.stepItem.active {
+  background: var(--mint-100);
+  color: var(--teal-700);
+  font-weight: 700;
+  border-left-color: var(--teal-400);
+}
+
+.stepItem.completed {
+  color: var(--teal-500);
+  border-left-color: var(--success);
+}
+
+/* Step check indicator */
+.stepCheck {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 700;
+  background: var(--mint-50);
+  color: var(--teal-300);
+  flex-shrink: 0;
+}
+
+.stepItem.active .stepCheck {
+  background: var(--teal-400);
+  color: white;
+}
+
+.stepItem.completed .stepCheck {
+  background: var(--teal-500);
+  color: white;
+}
+
+/* Step info */
+.stepInfo {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.stepTitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stepDescription {
+  font-size: 0.75rem;
+  color: var(--slate-400);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stepItem.active .stepDescription,
+.stepItem:hover .stepDescription {
+  color: var(--teal-500);
+}
+
+/* Slide down animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 1000px;
+  }
+}
+
+/* ===========================================
+   Responsive: 768px (tablet) - Drawer behavior
+   =========================================== */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 280px;
+    height: 100vh;
+    z-index: 250;
+    border-right: 1px solid var(--slate-200);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    max-height: none;
+    border-bottom: none;
+    padding-top: 16px;
+  }
+
+  .sidebar.drawerOpen {
+    left: 0;
+  }
+
+  .sidebarHeader {
+    display: flex;
+  }
+
+  .sidebarCloseBtn {
+    display: flex;
+  }
+
+  .sidebarTitle {
+    margin-bottom: 0;
+  }
+}
+
+/* ===========================================
+   Responsive: 480px (mobile) - Touch-friendly
+   =========================================== */
+@media (max-width: 480px) {
+  .stepItem {
+    min-height: 44px;
+    padding: 10px 12px;
+  }
+
+  .courseHeader {
+    min-height: 48px;
+  }
+}

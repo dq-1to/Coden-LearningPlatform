@@ -3,6 +3,7 @@ import { stepTests } from '../data/stepTests';
 import { useStats } from '../context/StatsContext';
 import { useAchievements } from '../context/AchievementContext';
 import PreviewArea from './PreviewArea';
+import styles from './StepTest.module.css';
 
 // ステップテストコンポーネント
 // 練習問題完了後に表示される総合テスト
@@ -50,7 +51,7 @@ function StepTest({ stepId, onPass, totalSteps = 8, completedSteps = [] }: StepT
     const [showPreview, setShowPreview] = useState(false);
 
     if (!test) {
-        return <div className="step-test-empty">テストデータがありません</div>;
+        return <div className={styles.stepTestEmpty}>テストデータがありません</div>;
     }
 
     // 入力変更ハンドラ
@@ -139,15 +140,15 @@ function StepTest({ stepId, onPass, totalSteps = 8, completedSteps = [] }: StepT
             if (i % 2 === 1) {
                 const index = parseInt(part) - 1;
                 const resultClass = results[index] === true
-                    ? 'correct'
+                    ? styles.correct
                     : results[index] === false
-                        ? 'incorrect'
+                        ? styles.incorrect
                         : '';
                 return (
                     <input
                         key={i}
                         type="text"
-                        className={`test-input ${resultClass}`}
+                        className={`${styles.testInput} ${resultClass}`}
                         value={inputs[index]}
                         onChange={(e) => handleInputChange(index, e.target.value)}
                         onKeyDown={handleKeyDown}
@@ -164,23 +165,23 @@ function StepTest({ stepId, onPass, totalSteps = 8, completedSteps = [] }: StepT
     // プレビュー表示モード
     if (showPreview) {
         return (
-            <div className="step-test passed">
-                <div className="test-header">
-                    <span className="test-badge success">✓ テスト合格</span>
-                    <h3 className="test-title">{test.title}</h3>
+            <div className={`${styles.stepTest} ${styles.passed}`}>
+                <div className={styles.testHeader}>
+                    <span className={`${styles.testBadge} ${styles.success}`}>✓ テスト合格</span>
+                    <h3 className={styles.testTitle}>{test.title}</h3>
                 </div>
 
-                <div className="preview-section">
+                <div className={styles.previewSection}>
                     <h4>🎮 動作プレビュー</h4>
-                    <p className="preview-description">あなたが書いたコードの動作を確認しましょう！</p>
-                    <div className="preview-container">
+                    <p className={styles.previewDescription}>あなたが書いたコードの動作を確認しましょう！</p>
+                    <div className={styles.previewContainer}>
                         <PreviewArea stepId={stepId} isCompleted={true} />
                     </div>
                 </div>
 
-                <div className="test-actions">
+                <div className={styles.testActions}>
                     <button
-                        className="complete-btn"
+                        className={styles.completeBtn}
                         onClick={handleComplete}
                     >
                         ✓ 次のステップへ進む
@@ -191,26 +192,26 @@ function StepTest({ stepId, onPass, totalSteps = 8, completedSteps = [] }: StepT
     }
 
     return (
-        <div className={`step-test ${isPassed ? 'passed' : ''}`}>
-            <div className="test-header">
-                <span className="test-badge">{isPassed ? '✓ テスト合格' : '📝 ステップテスト'}</span>
-                <h3 className="test-title">{test.title}</h3>
+        <div className={`${styles.stepTest} ${isPassed ? styles.passed : ''}`}>
+            <div className={styles.testHeader}>
+                <span className={styles.testBadge}>{isPassed ? '✓ テスト合格' : '📝 ステップテスト'}</span>
+                <h3 className={styles.testTitle}>{test.title}</h3>
             </div>
-            <p className="test-description">{test.description}</p>
-            {!isPassed && <p className="keyboard-hint">💡 Ctrl + Enter で回答を確認</p>}
+            <p className={styles.testDescription}>{test.description}</p>
+            {!isPassed && <p className={styles.keyboardHint}>💡 Ctrl + Enter で回答を確認</p>}
 
-            <div className="test-code-area">
-                <pre className="test-template">
+            <div className={styles.testCodeArea}>
+                <pre className={styles.testTemplate}>
                     <code>{renderTemplate()}</code>
                 </pre>
             </div>
 
             {showHints && (
-                <div className="test-hints">
+                <div className={styles.testHints}>
                     <h4>💡 ヒント</h4>
                     <ol>
                         {test.hints.map((hint, i) => (
-                            <li key={i} className={results[i] === true ? 'hint-solved' : ''}>
+                            <li key={i} className={results[i] === true ? styles.hintSolved : ''}>
                                 {hint}
                             </li>
                         ))}
@@ -219,22 +220,22 @@ function StepTest({ stepId, onPass, totalSteps = 8, completedSteps = [] }: StepT
             )}
 
             {message && (
-                <div className={`test-message ${message.includes('合格') ? 'success' : 'info'}`}>
+                <div className={`${styles.testMessage} ${message.includes('合格') ? styles.success : styles.info}`}>
                     {message}
                 </div>
             )}
 
-            <div className="test-actions">
+            <div className={styles.testActions}>
                 {!isPassed && (
                     <>
                         <button
-                            className="hint-toggle-btn"
+                            className={styles.hintToggleBtn}
                             onClick={() => setShowHints(!showHints)}
                         >
                             {showHints ? 'ヒントを隠す' : 'ヒントを表示'}
                         </button>
                         <button
-                            className="check-test-btn"
+                            className={styles.checkTestBtn}
                             onClick={checkAnswers}
                         >
                             🔍 回答を確認
@@ -243,7 +244,7 @@ function StepTest({ stepId, onPass, totalSteps = 8, completedSteps = [] }: StepT
                 )}
                 {isPassed && (
                     <button
-                        className="preview-btn"
+                        className={styles.previewBtn}
                         onClick={handleShowPreview}
                     >
                         🎮 動作を確認する

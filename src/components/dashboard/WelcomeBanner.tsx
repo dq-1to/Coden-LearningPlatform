@@ -1,5 +1,6 @@
 import { useStats } from '../../context/StatsContext';
 import { useMascot } from '../../context/MascotContext';
+import styles from '../../pages/Dashboard.module.css';
 
 // マスコット画像のインポート
 import mascotGreen from '../../assets/icons/mascot.png';
@@ -40,26 +41,26 @@ function WelcomeBanner({ userName = 'ユーザー', completedSteps, totalSteps }
     const mascotImage = mascotImages[currentMascot] || mascotImages.green;
 
     return (
-        <div className="welcome-banner">
-            <div className="welcome-content">
-                <h1 className="welcome-title">
+        <div className={styles.welcomeBanner}>
+            <div className={styles.welcomeContent}>
+                <h1 className={styles.welcomeTitle}>
                     {getGreeting()}、{userName}さん！👋
                 </h1>
-                <p className="welcome-subtitle">
-                    今週の目標まであと <span className="progress-highlight">{100 - progressPercent}%</span> です。その調子で頑張りましょう！
+                <p className={styles.welcomeSubtitle}>
+                    今週の目標まであと <span className={styles.progressHighlight}>{100 - progressPercent}%</span> です。その調子で頑張りましょう！
                 </p>
-                <div className="welcome-badges">
+                <div className={styles.welcomeBadges}>
                     {stats.streakDays > 0 && (
-                        <div className="streak-badge">
-                            <span className="badge-icon">🌱</span>
-                            <span className="badge-text">連続 {stats.streakDays}日達成中</span>
+                        <div className={styles.streakBadge}>
+                            <span className={styles.badgeIcon}>🌱</span>
+                            <span className={styles.badgeText}>連続 {stats.streakDays}日達成中</span>
                         </div>
                     )}
                 </div>
             </div>
-            <div className="welcome-mascot">
-                <div className="mascot-circle" title={mascotInfo.name}>
-                    <img src={mascotImage} alt={mascotInfo.name} className="mascot-image" />
+            <div className={styles.welcomeMascot}>
+                <div className={styles.mascotCircle} title={mascotInfo.name}>
+                    <img src={mascotImage} alt={mascotInfo.name} className={styles.mascotImage} />
                 </div>
             </div>
         </div>

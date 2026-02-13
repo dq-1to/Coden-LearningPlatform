@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import styles from './Preview.module.css';
 
 // Step8: カスタムHooks - 再利用可能なロジックを学ぶプレビュー
 
@@ -58,67 +59,45 @@ function CustomHookPreview() {
     const counter = useCounter(0);
 
     return (
-        <div
-            className="preview-content"
-            style={{
-                background: darkMode.value ? '#1f2937' : '#ffffff',
-                color: darkMode.value ? '#f3f4f6' : '#111827',
-                transition: 'all 0.3s ease'
-            }}
-        >
-            <h4 className="custom-hook-title">🪝 カスタムフックのデモ</h4>
+        <div className={darkMode.value ? styles.previewContentDark : styles.previewContentLight}>
+            <h4 className={styles.customHookTitle}>🪝 カスタムフックのデモ</h4>
 
             {/* useLocalStorage */}
-            <div className="custom-hook-section">
+            <div className={styles.customHookSection}>
                 <h5>useLocalStorage</h5>
                 <input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="名前を入力（自動保存）"
-                    style={{
-                        background: darkMode.value ? '#374151' : '#f3f4f6',
-                        color: darkMode.value ? '#f3f4f6' : '#111827',
-                        border: '1px solid',
-                        borderColor: darkMode.value ? '#4b5563' : '#d1d5db',
-                        padding: '8px 12px',
-                        borderRadius: '6px',
-                        width: '100%'
-                    }}
+                    className={darkMode.value ? styles.hookInputDark : styles.hookInput}
                 />
-                <p style={{ fontSize: '0.85rem', opacity: 0.7, marginTop: '8px' }}>
+                <p className={styles.hookHint}>
                     💾 入力した値はリロードしても保持されます
                 </p>
             </div>
 
             {/* useToggle */}
-            <div className="custom-hook-section" style={{ marginTop: '16px' }}>
+            <div className={styles.customHookSectionSpaced}>
                 <h5>useToggle</h5>
                 <button
                     onClick={darkMode.toggle}
-                    style={{
-                        background: darkMode.value ? '#6366f1' : '#4f46e5',
-                        color: 'white',
-                        border: 'none',
-                        padding: '10px 20px',
-                        borderRadius: '6px',
-                        cursor: 'pointer'
-                    }}
+                    className={darkMode.value ? styles.toggleBtnDark : styles.toggleBtn}
                 >
                     {darkMode.value ? '🌙 ダークモード' : '☀️ ライトモード'}
                 </button>
             </div>
 
             {/* useCounter */}
-            <div className="custom-hook-section" style={{ marginTop: '16px' }}>
+            <div className={styles.customHookSectionSpaced}>
                 <h5>useCounter</h5>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div className={styles.counterRow}>
                     <button onClick={counter.decrement}>-</button>
-                    <span style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
+                    <span className={styles.counterValue}>
                         {counter.count}
                     </span>
                     <button onClick={counter.increment}>+</button>
-                    <button onClick={counter.reset} style={{ marginLeft: '10px' }}>
+                    <button onClick={counter.reset} className={styles.counterResetBtn}>
                         リセット
                     </button>
                 </div>

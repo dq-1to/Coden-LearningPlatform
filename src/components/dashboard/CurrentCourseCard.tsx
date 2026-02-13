@@ -1,4 +1,6 @@
 import { Step, Course } from '../../types';
+import { getStepsByCourse } from '../../data/steps';
+import styles from '../../pages/Dashboard.module.css';
 
 interface CurrentCourseCardProps {
     currentStep: Step | undefined;
@@ -14,8 +16,9 @@ function CurrentCourseCard({ currentStep, course, completedSteps, totalStepsInCo
     }
 
     // コース内の完了数を計算
+    const courseStepIds = getStepsByCourse(course.id).map(s => s.id);
     const completedInCourse = completedSteps.filter(id =>
-        id.startsWith(course.id) || true // TODO: 実際のコースマッピングを使う
+        courseStepIds.includes(id)
     ).length;
 
     const progressPercent = totalStepsInCourse > 0
@@ -23,43 +26,43 @@ function CurrentCourseCard({ currentStep, course, completedSteps, totalStepsInCo
         : 0;
 
     return (
-        <section className="current-course-section">
-            <h2 className="section-header">
-                <span className="header-icon">🚀</span>
+        <section className={styles.currentCourseSection}>
+            <h2 className={styles.sectionHeader}>
+                <span className={styles.headerIcon}>🚀</span>
                 学習を再開する
             </h2>
-            <div className="current-course-card">
-                <div className="course-thumbnail">
-                    <div className="thumbnail-placeholder" style={{ backgroundColor: `${course.color}20` }}>
-                        <span className="course-emoji">{course.icon}</span>
+            <div className={styles.currentCourseCard}>
+                <div className={styles.courseThumbnail}>
+                    <div className={styles.thumbnailPlaceholder} style={{ backgroundColor: `${course.color}20` }}>
+                        <span className={styles.courseEmoji}>{course.icon}</span>
                     </div>
                 </div>
-                <div className="course-details">
-                    <div className="course-header">
-                        <h3 className="course-title">{currentStep.title}</h3>
+                <div className={styles.courseDetails}>
+                    <div className={styles.courseHeader}>
+                        <h3 className={styles.courseTitle}>{currentStep.title}</h3>
                         <span
-                            className="course-level-badge"
+                            className={styles.courseLevelBadge}
                             style={{ backgroundColor: `${course.color}20`, color: course.color }}
                         >
                             {course.level === 'beginner' ? '初級者' : course.level === 'intermediate' ? '中級者' : '上級者'}
                         </span>
                     </div>
-                    <p className="course-description">{currentStep.description}</p>
-                    <div className="course-progress">
-                        <div className="progress-info">
-                            <span className="progress-text">セクション {completedInCourse + 1} / {totalStepsInCourse}</span>
-                            <span className="progress-percent">進捗 {progressPercent}%</span>
+                    <p className={styles.courseDescription}>{currentStep.description}</p>
+                    <div className={styles.courseProgress}>
+                        <div className={styles.progressInfo}>
+                            <span className={styles.progressText}>セクション {completedInCourse + 1} / {totalStepsInCourse}</span>
+                            <span className={styles.progressPercent}>進捗 {progressPercent}%</span>
                         </div>
-                        <div className="progress-bar">
+                        <div className={styles.progressBar}>
                             <div
-                                className="progress-fill"
+                                className={styles.progressFill}
                                 style={{ width: `${progressPercent}%` }}
                             />
                         </div>
                     </div>
-                    <button className="resume-button" onClick={onResume}>
+                    <button className={styles.resumeButton} onClick={onResume}>
                         レッスンを再開する
-                        <span className="resume-icon">▶</span>
+                        <span className={styles.resumeIcon}>▶</span>
                     </button>
                 </div>
             </div>

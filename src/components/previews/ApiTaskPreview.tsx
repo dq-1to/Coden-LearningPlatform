@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styles from './Preview.module.css';
 
 interface Task {
     id: number;
@@ -46,127 +47,59 @@ function ApiTaskPreview() {
     const completedCount = tasks.filter(t => t.completed).length;
 
     return (
-        <div style={{ padding: '16px', fontFamily: 'sans-serif' }}>
-            <h3 style={{ margin: '0 0 12px', color: '#4f46e5' }}>
+        <div className={styles.apiTaskContainer}>
+            <h3 className={styles.apiTaskTitle}>
                 📋 タスク管理アプリ
             </h3>
 
-            <div style={{
-                background: '#f0f9ff',
-                padding: '8px 12px',
-                borderRadius: '8px',
-                marginBottom: '12px',
-                fontSize: '0.85rem',
-                color: '#0369a1'
-            }}>
+            <div className={styles.apiStatusBar}>
                 {completedCount}/{tasks.length} 完了
-                <div style={{
-                    background: '#e0e7ff',
-                    borderRadius: '4px',
-                    height: '6px',
-                    marginTop: '4px',
-                    overflow: 'hidden'
-                }}>
-                    <div style={{
-                        background: '#4f46e5',
-                        height: '100%',
-                        width: `${tasks.length > 0 ? (completedCount / tasks.length) * 100 : 0}%`,
-                        transition: 'width 0.3s ease'
-                    }} />
+                <div className={styles.apiProgressTrack}>
+                    <div
+                        className={styles.apiProgressFill}
+                        style={{ width: `${tasks.length > 0 ? (completedCount / tasks.length) * 100 : 0}%` }}
+                    />
                 </div>
             </div>
 
-            <form onSubmit={addTask} style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
+            <form onSubmit={addTask} className={styles.apiForm}>
                 <input
                     value={newTitle}
                     onChange={(e) => setNewTitle(e.target.value)}
                     placeholder="新しいタスク..."
-                    style={{
-                        flex: 1,
-                        padding: '8px 12px',
-                        border: '2px solid #e2e8f0',
-                        borderRadius: '8px',
-                        fontSize: '0.9rem',
-                        outline: 'none'
-                    }}
+                    className={styles.apiInput}
                 />
-                <button
-                    type="submit"
-                    style={{
-                        padding: '8px 16px',
-                        background: '#4f46e5',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '8px',
-                        cursor: 'pointer',
-                        fontSize: '0.9rem',
-                        fontWeight: 'bold'
-                    }}
-                >
+                <button type="submit" className={styles.apiAddBtn}>
                     追加
                 </button>
             </form>
 
             {error && (
-                <div style={{
-                    background: '#fef2f2',
-                    color: '#dc2626',
-                    padding: '8px 12px',
-                    borderRadius: '8px',
-                    marginBottom: '8px',
-                    fontSize: '0.85rem'
-                }}>
+                <div className={styles.apiError}>
                     ❌ {error}
                 </div>
             )}
 
             {loading ? (
-                <p style={{ textAlign: 'center', color: '#94a3b8' }}>⏳ 読み込み中...</p>
+                <p className={styles.apiEmptyText}>⏳ 読み込み中...</p>
             ) : tasks.length === 0 ? (
-                <p style={{ textAlign: 'center', color: '#94a3b8' }}>📝 まだタスクがありません</p>
+                <p className={styles.apiEmptyText}>📝 まだタスクがありません</p>
             ) : (
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                <ul className={styles.apiTaskList}>
                     {tasks.map(task => (
-                        <li key={task.id} style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            padding: '10px 12px',
-                            marginBottom: '4px',
-                            background: task.completed ? '#f0fdf4' : '#fff',
-                            borderRadius: '8px',
-                            border: '1px solid #e2e8f0',
-                            transition: 'all 0.2s ease'
-                        }}>
+                        <li key={task.id} className={task.completed ? styles.apiTaskItemCompleted : styles.apiTaskItem}>
                             <span
                                 onClick={() => toggleTask(task.id)}
-                                style={{
-                                    cursor: 'pointer',
-                                    fontSize: '1.1rem',
-                                    userSelect: 'none'
-                                }}
+                                className={styles.apiTaskCheckbox}
                             >
                                 {task.completed ? '✅' : '⬜'}
                             </span>
-                            <span style={{
-                                flex: 1,
-                                textDecoration: task.completed ? 'line-through' : 'none',
-                                color: task.completed ? '#94a3b8' : '#1e293b',
-                                fontSize: '0.9rem'
-                            }}>
+                            <span className={task.completed ? styles.apiTaskTextCompleted : styles.apiTaskText}>
                                 {task.title}
                             </span>
                             <button
                                 onClick={() => deleteTask(task.id)}
-                                style={{
-                                    background: 'none',
-                                    border: 'none',
-                                    cursor: 'pointer',
-                                    fontSize: '0.85rem',
-                                    color: '#ef4444',
-                                    padding: '4px 8px',
-                                    borderRadius: '4px'
-                                }}
+                                className={styles.apiDeleteBtn}
                             >
                                 🗑️
                             </button>

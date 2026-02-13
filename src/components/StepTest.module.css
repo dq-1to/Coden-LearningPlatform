@@ -1,0 +1,324 @@
+/* ===========================================
+   StepTest - CSS Module
+   =========================================== */
+
+.contentTest {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  padding: 24px 32px;
+  gap: 24px;
+  background: #fdfdfd;
+}
+
+.testLeft {
+  flex: 1;
+  overflow-y: auto;
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  border: 1px solid var(--teal-50);
+  box-shadow: var(--shadow-sm);
+}
+
+.testRight {
+  width: 420px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Step test component */
+.stepTest {
+  background: transparent;
+}
+
+.stepTest.passed {
+  border-color: var(--success);
+}
+
+.stepTestEmpty {
+  color: var(--slate-400);
+  font-style: italic;
+}
+
+.testHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.testBadge {
+  background: var(--teal-500);
+  color: white;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.testBadge.success {
+  background: var(--success);
+  color: white;
+}
+
+.testTitle {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--teal-800);
+}
+
+.testDescription {
+  color: var(--slate-600);
+  margin-bottom: 24px;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.keyboardHint {
+  font-size: 0.85rem;
+  color: var(--slate-500);
+  margin-bottom: 16px;
+  padding: 10px 16px;
+  background: var(--mint-50);
+  border-radius: var(--radius-md);
+  display: inline-block;
+  font-weight: 500;
+}
+
+.testCodeArea {
+  margin-bottom: 20px;
+}
+
+.testTemplate {
+  background: var(--slate-800);
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+  box-shadow: var(--shadow-lg);
+  white-space: pre-wrap;
+  line-height: 1.8;
+}
+
+.testTemplate code {
+  color: #e2e8f0;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.95rem;
+}
+
+/* Test input */
+.testInput {
+  background: rgba(20, 184, 166, 0.15);
+  border: 2px solid var(--teal-400);
+  border-radius: var(--radius-sm);
+  color: var(--accent-yellow);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  padding: 4px 10px;
+  min-width: 100px;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.testInput:focus {
+  border-color: var(--accent-yellow);
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.3);
+}
+
+.testInput.correct {
+  border-color: var(--success);
+  background: rgba(16, 185, 129, 0.25);
+}
+
+.testInput.incorrect {
+  border-color: var(--danger);
+  background: rgba(239, 68, 68, 0.25);
+}
+
+/* Test hints */
+.testHints {
+  background: var(--warning-light);
+  border: 2px solid var(--warning);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  margin-bottom: 16px;
+}
+
+.testHints h4 {
+  margin: 0 0 12px 0;
+  color: #92400e;
+  font-weight: 700;
+}
+
+.testHints ol {
+  margin: 0;
+  padding-left: 20px;
+  color: #92400e;
+}
+
+.testHints li {
+  margin-bottom: 6px;
+}
+
+.hintSolved {
+  color: var(--success);
+  text-decoration: line-through;
+}
+
+/* Test message */
+.testMessage {
+  padding: 16px 24px;
+  border-radius: var(--radius-lg);
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.testMessage.success {
+  background: var(--success-light);
+  color: #065f46;
+  border: 2px solid var(--success);
+}
+
+.testMessage.info {
+  background: var(--slate-100);
+  color: var(--slate-700);
+  border: 2px solid var(--slate-300);
+}
+
+/* Test actions */
+.testActions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hintToggleBtn {
+  padding: 12px 20px;
+  background: var(--warning-light);
+  color: #92400e;
+  border: 2px solid var(--warning);
+  border-radius: var(--radius-lg);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.hintToggleBtn:hover {
+  background: #fde68a;
+  transform: translateY(-2px);
+}
+
+.checkTestBtn {
+  padding: 12px 24px;
+  background: var(--teal-400);
+  color: white;
+  border: 2px solid var(--teal-500);
+  border-radius: var(--radius-lg);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.checkTestBtn:hover {
+  background: var(--teal-500);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-teal);
+}
+
+/* Preview button */
+.previewBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--teal-400) 0%, var(--teal-500) 100%);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
+}
+
+.previewBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(20, 184, 166, 0.4);
+}
+
+.previewSection {
+  margin: 24px 0;
+  padding: 20px;
+  background: var(--slate-50);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--teal-100);
+}
+
+.previewSection h4 {
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+  color: var(--teal-700);
+}
+
+.previewDescription {
+  margin: 0 0 16px 0;
+  font-size: 0.9rem;
+  color: var(--slate-600);
+}
+
+.previewContainer {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 16px;
+  border: 1px solid var(--slate-200);
+}
+
+.completeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.completeBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+/* ===========================================
+   Responsive: 768px
+   =========================================== */
+@media (max-width: 768px) {
+  .contentTest {
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .testLeft,
+  .testRight {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+}

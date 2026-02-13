@@ -5,7 +5,7 @@ import AppHeader from '../components/AppHeader';
 import { usePt } from '../context/PtContext';
 import { useAuth } from '../hooks/useAuth';
 import { MascotSelector } from '../components/dashboard'; // Import MascotSelector
-import '../App.css';
+import styles from './ProfilePage.module.css';
 
 function ProfilePage() {
     const { stats } = useStats();
@@ -35,71 +35,71 @@ function ProfilePage() {
         <div className="app">
             <AppHeader />
 
-            <div className="profile-page">
-                <div className="profile-container">
+            <div className={styles.profilePage}>
+                <div className={styles.profileContainer}>
                     {/* 1. Hero Section: User Profile & Current Status */}
-                    <div className="profile-hero">
-                        <div className="profile-card">
-                            <div className="d-flex align-center gap-24">
-                                <div className="profile-avatar-large">
+                    <div className={styles.profileHero}>
+                        <div className={styles.profileCard}>
+                            <div className={`${styles.dFlex} ${styles.alignCenter} ${styles.gap24}`}>
+                                <div className={styles.profileAvatarLarge}>
                                     {username.charAt(0).toUpperCase()}
                                 </div>
-                                <div className="profile-info">
-                                    <h2 className="profile-username">{username}</h2>
-                                    <div className="profile-rank-badge">
+                                <div className={styles.profileInfo}>
+                                    <h2 className={styles.profileUsername}>{username}</h2>
+                                    <div className={styles.profileRankBadge}>
                                         🔰 ビギナー
                                     </div>
                                 </div>
                             </div>
-                            <div className="profile-total-pt-large">
-                                <div className="pt-label">Total Points</div>
-                                <div className="pt-value-large">
-                                    {pt.toLocaleString()} <span className="pt-unit">Pt</span>
+                            <div className={styles.profileTotalPtLarge}>
+                                <div className={styles.ptLabel}>Total Points</div>
+                                <div className={styles.ptValueLarge}>
+                                    {pt.toLocaleString()} <span className={styles.ptUnit}>Pt</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     {/* 2. Stats Grid Section */}
-                    <div className="stats-grid">
-                        <div className="stat-card-bento">
-                            <span className="stat-icon-large">⏱️</span>
+                    <div className={styles.statsGrid}>
+                        <div className={styles.statCardBento}>
+                            <span className={styles.statIconLarge}>⏱️</span>
                             <div className="stat-info">
-                                <span className="stat-value-large">{formatTime(stats.totalTime)}</span>
+                                <span className={styles.statValueLarge}>{formatTime(stats.totalTime)}</span>
                                 <span className="stat-label">総学習時間</span>
                             </div>
                         </div>
 
-                        <div className="stat-card-bento">
-                            <span className="stat-icon-large">🎯</span>
+                        <div className={styles.statCardBento}>
+                            <span className={styles.statIconLarge}>🎯</span>
                             <div className="stat-info">
-                                <span className="stat-value-large">{accuracy}%</span>
+                                <span className={styles.statValueLarge}>{accuracy}%</span>
                                 <span className="stat-label">正答率</span>
                             </div>
                         </div>
 
-                        <div className="stat-card-bento">
-                            <span className="stat-icon-large">🔥</span>
+                        <div className={styles.statCardBento}>
+                            <span className={styles.statIconLarge}>🔥</span>
                             <div className="stat-info">
-                                <span className="stat-value-large">{stats.streakDays}日</span>
+                                <span className={styles.statValueLarge}>{stats.streakDays}日</span>
                                 <span className="stat-label">連続学習</span>
                             </div>
                         </div>
 
-                        <div className="stat-card-bento">
-                            <span className="stat-icon-large">✅</span>
+                        <div className={styles.statCardBento}>
+                            <span className={styles.statIconLarge}>✅</span>
                             <div className="stat-info">
-                                <span className="stat-value-large">{stats.correctAnswers}</span>
+                                <span className={styles.statValueLarge}>{stats.correctAnswers}</span>
                                 <span className="stat-label">正解数</span>
                             </div>
                         </div>
                     </div>
 
                     {/* 3. Main Content Stack */}
-                    <div className="content-stack">
+                    <div className={styles.contentStack}>
                         {/* Mascot Section */}
-                        <section className="section-card">
-                            <div className="section-header">
+                        <section className={styles.sectionCard}>
+                            <div className={styles.sectionHeader}>
                                 <h3>🎨 パートナーマスコット</h3>
                                 <p>一緒に学習するパートナーを選びましょう</p>
                             </div>
@@ -107,25 +107,25 @@ function ProfilePage() {
                         </section>
 
                         {/* Achievements Section */}
-                        <section className="section-card">
-                            <div className="section-header">
+                        <section className={styles.sectionCard}>
+                            <div className={styles.sectionHeader}>
                                 <h3>🏆 解除済み実績</h3>
                                 <p>学習の節目に獲得したバッジです</p>
                             </div>
-                            <div className="achievements-grid">
+                            <div className={styles.achievementsGrid}>
                                 {ACHIEVEMENTS.map(achievement => {
                                     const isUnlocked = unlockedAchievements.includes(achievement.id);
                                     return (
                                         <div
                                             key={achievement.id}
-                                            className={`achievement-card ${isUnlocked ? 'unlocked' : 'locked'}`}
+                                            className={`${styles.achievementCard} ${isUnlocked ? styles.unlocked : styles.locked}`}
                                         >
-                                            <span className="achievement-icon">{achievement.icon}</span>
-                                            <div className="achievement-details">
+                                            <span className={styles.achievementIcon}>{achievement.icon}</span>
+                                            <div className={styles.achievementDetails}>
                                                 <strong>{achievement.title}</strong>
                                                 <p>{achievement.description}</p>
                                             </div>
-                                            {isUnlocked && <span className="unlocked-badge">✓</span>}
+                                            {isUnlocked && <span className={styles.unlockedBadge}>✓</span>}
                                         </div>
                                     );
                                 })}
@@ -133,35 +133,35 @@ function ProfilePage() {
                         </section>
 
                         {/* History Section */}
-                        <div className="split-section">
-                            <section className="section-card flex-1">
-                                <div className="section-header">
+                        <div className={styles.splitSection}>
+                            <section className={`${styles.sectionCard} ${styles.flex1}`}>
+                                <div className={styles.sectionHeader}>
                                     <h3>📜 ポイント履歴</h3>
                                 </div>
-                                <div className="pt-history-list">
+                                <div className={styles.ptHistoryList}>
                                     {ptHistory.length === 0 ? (
-                                        <p className="no-history">履歴はまだありません</p>
+                                        <p className={styles.noHistory}>履歴はまだありません</p>
                                     ) : (
                                         ptHistory.map((history, index) => (
-                                            <div key={index} className="pt-history-item">
-                                                <div className="history-main">
-                                                    <span className="pt-history-reason">{history.reason}</span>
-                                                    <span className="pt-history-date">
+                                            <div key={index} className={styles.ptHistoryItem}>
+                                                <div className={styles.historyMain}>
+                                                    <span className={styles.ptHistoryReason}>{history.reason}</span>
+                                                    <span className={styles.ptHistoryDate}>
                                                         {new Date(history.timestamp).toLocaleDateString()}
                                                     </span>
                                                 </div>
-                                                <span className="pt-history-amount">+{history.amount}</span>
+                                                <span className={styles.ptHistoryAmount}>+{history.amount}</span>
                                             </div>
                                         ))
                                     )}
                                 </div>
                             </section>
 
-                            <section className="section-card flex-1">
-                                <div className="section-header">
+                            <section className={`${styles.sectionCard} ${styles.flex1}`}>
+                                <div className={styles.sectionHeader}>
                                     <h3>📚 ステップ別進捗</h3>
                                 </div>
-                                <div className="step-stats-list">
+                                <div className={styles.stepStatsList}>
                                     {steps.map(step => {
                                         const stepStats = stats.stepStats[step.id];
                                         const attempts = stepStats?.attempts || 0;
@@ -171,20 +171,20 @@ function ProfilePage() {
                                             : 0;
 
                                         return (
-                                            <div key={step.id} className="step-stat-item">
-                                                <div className="step-stat-header">
-                                                    <span className="step-stat-title">{step.title}</span>
-                                                    <span className={`step-accuracy ${stepAccuracy >= 80 ? 'high' : stepAccuracy >= 50 ? 'medium' : 'low'}`}>
+                                            <div key={step.id} className={styles.stepStatItem}>
+                                                <div className={styles.stepStatHeader}>
+                                                    <span className={styles.stepStatTitle}>{step.title}</span>
+                                                    <span className={`${styles.stepAccuracy} ${stepAccuracy >= 80 ? styles.high : stepAccuracy >= 50 ? styles.medium : styles.low}`}>
                                                         {stepAccuracy}%
                                                     </span>
                                                 </div>
-                                                <div className="step-stat-details">
+                                                <div className={styles.stepStatDetails}>
                                                     <span>試行: {attempts}回</span>
                                                     <span>ミス: {errors}回</span>
                                                 </div>
-                                                <div className="step-stat-bar">
+                                                <div className={styles.stepStatBar}>
                                                     <div
-                                                        className="step-stat-fill"
+                                                        className={styles.stepStatFill}
                                                         style={{ width: `${stepAccuracy}%` }}
                                                     />
                                                 </div>

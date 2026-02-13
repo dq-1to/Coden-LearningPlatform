@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Step } from '../types';
 import CodeBlock from './CodeBlock';
+import styles from './StepViewer.module.css';
 
 interface StepViewerProps {
     step: Step | undefined;
@@ -33,7 +34,7 @@ function renderContent(content: string): ReactNode[] {
     // Markdownフォーマット（【】がない）の場合
     if (!isLegacyFormat) {
         return [
-            <div key="md-content" className="explanation-markdown">
+            <div key="md-content" className={styles.explanationMarkdown}>
                 <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={{
@@ -51,7 +52,7 @@ function renderContent(content: string): ReactNode[] {
                                 );
                             }
                             return (
-                                <code className="inline-code" {...props}>
+                                <code className={styles.inlineCode} {...props}>
                                     {children}
                                 </code>
                             );
@@ -68,26 +69,26 @@ function renderContent(content: string): ReactNode[] {
     const flushSection = () => {
         if (currentSection.length > 0 || sectionTitle) {
             elements.push(
-                <div key={key++} className="explanation-section-block">
+                <div key={key++} className={styles.explanationSectionBlock}>
                     {sectionTitle && (
-                        <h4 className="explanation-subtitle">{sectionTitle}</h4>
+                        <h4 className={styles.explanationSubtitle}>{sectionTitle}</h4>
                     )}
-                    <div className="explanation-body">
+                    <div className={styles.explanationBody}>
                         {currentSection.map((line, i) => {
                             // コード行
                             if (/^(const |let |var |import |function |return |if |switch |useEffect|useMemo|useCallback|\{|<|・省略)/.test(line.trim())) {
-                                return <code key={i} className="inline-code-line">{line}</code>;
+                                return <code key={i} className={styles.inlineCodeLine}>{line}</code>;
                             }
                             // リスト項目
                             if (line.trim().startsWith('・')) {
-                                return <li key={i} className="explanation-list-item">{line.trim().substring(1)}</li>;
+                                return <li key={i} className={styles.explanationListItem}>{line.trim().substring(1)}</li>;
                             }
                             // 空行
                             if (line.trim() === '') {
                                 return <br key={i} />;
                             }
                             // 通常テキスト
-                            return <p key={i} className="explanation-paragraph">{line}</p>;
+                            return <p key={i} className={styles.explanationParagraph}>{line}</p>;
                         })}
                     </div>
                 </div>
@@ -113,30 +114,30 @@ function renderContent(content: string): ReactNode[] {
 
 function StepViewer({ step }: StepViewerProps) {
     if (!step) {
-        return <div className="step-viewer">ステップを選択してください</div>;
+        return <div className={styles.stepViewer}>ステップを選択してください</div>;
     }
 
     return (
-        <div className="step-viewer">
+        <div className={styles.stepViewer}>
             {/* 解説セクション */}
-            <section className="explanation-section">
-                <h3 className="section-title">📖 解説</h3>
-                <div className="explanation-content">
+            <section>
+                <h3 className={styles.sectionTitle}>📖 解説</h3>
+                <div className={styles.explanationContent}>
                     {renderContent(step.content)}
                 </div>
                 <a
                     href={step.docSource}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="doc-link"
+                    className={styles.docLink}
                 >
                     📄 React公式ドキュメントを見る
                 </a>
             </section>
 
             {/* コードサンプル */}
-            <section className="code-section">
-                <h3 className="section-title">💻 サンプルコード</h3>
+            <section className={styles.codeSection}>
+                <h3 className={styles.sectionTitle}>💻 サンプルコード</h3>
                 <CodeBlock
                     code={step.code}
                     language="jsx"

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Step, Course } from '../types';
 import { courses } from '../data/steps';
+import styles from './Sidebar.module.css';
 
 interface SidebarProps {
     steps: Step[];
@@ -56,21 +57,21 @@ function Sidebar({ steps, currentStepId, onStepSelect, completedSteps, isDrawerO
         <>
             {/* オーバーレイ（モバイル用） */}
             <div
-                className={`sidebar-overlay ${isDrawerOpen ? 'active' : ''}`}
+                className={`${styles.sidebarOverlay} ${isDrawerOpen ? styles.active : ''}`}
                 onClick={onDrawerClose}
             />
-            <aside className={`sidebar ${isDrawerOpen ? 'drawer-open' : ''}`}>
-                <div className="sidebar-header">
-                    <h2 className="sidebar-title">📚 学習コース</h2>
+            <aside className={`${styles.sidebar} ${isDrawerOpen ? styles.drawerOpen : ''}`}>
+                <div className={styles.sidebarHeader}>
+                    <h2 className={styles.sidebarTitle}>📚 学習コース</h2>
                     <button
-                        className="sidebar-close-btn"
+                        className={styles.sidebarCloseBtn}
                         onClick={onDrawerClose}
                         aria-label="サイドバーを閉じる"
                     >
                         ✕
                     </button>
                 </div>
-                <nav className="course-nav">
+                <nav className={styles.courseNav}>
                     {courses.map((course: Course) => {
                         const progress = getCourseProgress(course.id);
                         const isExpanded = expandedCourse === course.id;
@@ -80,31 +81,31 @@ function Sidebar({ steps, currentStepId, onStepSelect, completedSteps, isDrawerO
                             : 0;
 
                         return (
-                            <div key={course.id} className="course-group">
+                            <div key={course.id} className={styles.courseGroup}>
                                 <button
-                                    className={`course-header ${isExpanded ? 'expanded' : ''} ${isComplete ? 'completed' : ''}`}
+                                    className={`${styles.courseHeader} ${isExpanded ? styles.expanded : ''} ${isComplete ? styles.completed : ''}`}
                                     onClick={() => toggleCourse(course.id)}
                                 >
-                                    <div className="course-info">
-                                        <span className="course-icon">{course.icon}</span>
-                                        <div className="course-meta">
-                                            <span className="course-name">{course.title}</span>
-                                            <span className="course-progress-text">
+                                    <div className={styles.courseInfo}>
+                                        <span className={styles.courseIcon}>{course.icon}</span>
+                                        <div className={styles.courseMeta}>
+                                            <span className={styles.courseName}>{course.title}</span>
+                                            <span className={styles.courseProgressText}>
                                                 {progress.completed}/{progress.total} 完了
                                             </span>
-                                            <div className="course-progress-bar">
+                                            <div className={styles.courseProgressBar}>
                                                 <div
-                                                    className="course-progress-fill"
+                                                    className={styles.courseProgressFill}
                                                     style={{ width: `${progressPercent}%` }}
                                                 />
                                             </div>
                                         </div>
                                     </div>
-                                    <span className={`expand-icon ${isExpanded ? 'rotated' : ''}`}>▼</span>
+                                    <span className={`${styles.expandIcon} ${isExpanded ? styles.rotated : ''}`}>▼</span>
                                 </button>
 
                                 {isExpanded && (
-                                    <ul className="step-list">
+                                    <ul className={styles.stepList}>
                                         {getStepsByCourse(course.id).map((step, index) => {
                                             const isActive = step.id === currentStepId;
                                             const isCompleted = completedSteps.includes(step.id);
@@ -113,15 +114,15 @@ function Sidebar({ steps, currentStepId, onStepSelect, completedSteps, isDrawerO
                                                 <li
                                                     key={step.id}
                                                     ref={isActive ? activeStepRef : null}
-                                                    className={`step-item ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`}
+                                                    className={`${styles.stepItem} ${isActive ? styles.active : ''} ${isCompleted ? styles.completed : ''}`}
                                                     onClick={() => handleStepClick(step.id)}
                                                 >
-                                                    <span className="step-check">
+                                                    <span className={styles.stepCheck}>
                                                         {isCompleted ? '✓' : index + 1}
                                                     </span>
-                                                    <div className="step-info">
-                                                        <span className="step-title">{step.title}</span>
-                                                        <span className="step-description">{step.description}</span>
+                                                    <div className={styles.stepInfo}>
+                                                        <span className={styles.stepTitle}>{step.title}</span>
+                                                        <span className={styles.stepDescription}>{step.description}</span>
                                                     </div>
                                                 </li>
                                             );

@@ -1,0 +1,69 @@
+/* ===========================================
+   Achievement Toast - CSS Module
+   =========================================== */
+
+.achievementNotification {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 1000;
+  animation: slideInRight 0.5s ease;
+}
+
+.achievementToast {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(135deg, var(--soft-yellow) 0%, #fde68a 100%);
+  padding: 20px 28px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  border: 2px solid var(--warning);
+}
+
+.achievementIcon {
+  font-size: 2.8rem;
+  animation: bounce 0.6s ease;
+}
+
+.achievementInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.achievementInfo strong {
+  color: #92400e;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.achievementInfo span {
+  color: #78350f;
+  font-weight: 800;
+  font-size: 1.15rem;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}

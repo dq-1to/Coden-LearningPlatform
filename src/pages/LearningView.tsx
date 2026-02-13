@@ -12,6 +12,7 @@ import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
 import { useAchievements } from '../context/AchievementContext';
 import { useStats } from '../context/StatsContext';
 import { usePt, PT_REWARDS } from '../context/PtContext';
+import styles from './LearningView.module.css';
 
 // 学習進捗のlocalStorageキー
 const PROGRESS_KEY = 'learning-progress';
@@ -156,22 +157,22 @@ function LearningView() {
 
                 <main className="main-content">
                     {/* モード切り替えタブ */}
-                    <div className="mode-tabs">
+                    <div className={styles.modeTabs}>
                         <button
-                            className={`mode-tab ${mode === 'view' ? 'active' : ''}`}
+                            className={`${styles.modeTab} ${mode === 'view' ? styles.active : ''}`}
                             onClick={() => setMode('view')}
                         >
                             📖 閲覧モード
                         </button>
                         <button
-                            className={`mode-tab ${mode === 'practice' || mode === 'test' ? 'active' : ''}`}
+                            className={`${styles.modeTab} ${mode === 'practice' || mode === 'test' ? styles.active : ''}`}
                             onClick={() => setMode(isPracticeComplete ? 'test' : 'practice')}
                         >
                             ✏️ 練習モード
                             {isPracticeComplete && ' ✓'}
                         </button>
                         <button
-                            className={`mode-tab ${mode === 'challenge' ? 'active' : ''}`}
+                            className={`${styles.modeTab} ${mode === 'challenge' ? styles.active : ''}`}
                             onClick={() => setMode('challenge')}
                         >
                             🏆 チャレンジ
@@ -184,13 +185,13 @@ function LearningView() {
                             <div className="content-left">
                                 <StepViewer step={currentStep} />
                             </div>
-                            <div className="content-right view-mode-hint">
-                                <div className="hint-box-large">
-                                    <span className="hint-icon">💡</span>
+                            <div className={`content-right ${styles.viewModeHint}`}>
+                                <div className={styles.hintBoxLarge}>
+                                    <span className={styles.hintIcon}>💡</span>
                                     <h4>動作プレビューを見るには</h4>
                                     <p>練習モードで問題を解いて、ステップテストに合格しましょう！</p>
                                     <button
-                                        className="start-practice-btn"
+                                        className={styles.startPracticeBtn}
                                         onClick={() => setMode(isPracticeComplete ? 'test' : 'practice')}
                                     >
                                         {isPracticeComplete ? 'ステップテストへ' : '練習を始める'} →
@@ -206,8 +207,8 @@ function LearningView() {
                             />
                         </div>
                     ) : mode === 'test' ? (
-                        <div className="content-test">
-                            <div className="test-left">
+                        <div className={styles.contentTest}>
+                            <div className={styles.testLeft}>
                                 <StepTest
                                     stepId={currentStepId}
                                     onPass={handleTestPass}
@@ -215,7 +216,7 @@ function LearningView() {
                                     completedSteps={completedSteps}
                                 />
                             </div>
-                            <div className="test-right">
+                            <div className={styles.testRight}>
                                 <PreviewArea
                                     stepId={currentStepId}
                                     isCompleted={isCurrentComplete}

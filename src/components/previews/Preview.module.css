@@ -1,0 +1,790 @@
+/* ===========================================
+   Preview Components - 共通CSS Module
+   =========================================== */
+
+.previewContent {
+  background: white;
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--slate-200);
+}
+
+/* ===========================================
+   カウンタープレビュー
+   =========================================== */
+.counterDisplay {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  color: var(--teal-700);
+  margin-bottom: 24px;
+}
+
+.counterButtons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.counterButtons button {
+  padding: 12px 24px;
+  background: var(--teal-400);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.counterButtons button:hover {
+  background: var(--teal-500);
+  transform: translateY(-2px);
+}
+
+/* ===========================================
+   ToDoプレビュー
+   =========================================== */
+.todoInputArea {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.todoInput {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  font-size: 0.95rem;
+  transition: all var(--transition-fast);
+}
+
+.todoInput:focus {
+  outline: none;
+  border-color: var(--teal-400);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+}
+
+.todoAddBtn {
+  padding: 12px 20px;
+  background: var(--teal-400);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.todoAddBtn:hover {
+  background: var(--teal-500);
+}
+
+.todoEmpty {
+  text-align: center;
+  color: var(--slate-400);
+  padding: 24px;
+}
+
+.todoList {
+  list-style: none;
+}
+
+.todoItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: var(--slate-50);
+  border-radius: var(--radius-md);
+  margin-bottom: 10px;
+  border: 1px solid var(--slate-100);
+}
+
+.todoText {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.todoTextCompleted {
+  composes: todoText;
+  text-decoration: line-through;
+  color: var(--slate-400);
+}
+
+.todoDeleteBtn {
+  padding: 6px 12px;
+  background: var(--danger-light);
+  color: var(--danger);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.todoDeleteBtn:hover {
+  background: var(--danger);
+  color: white;
+}
+
+/* ===========================================
+   メモプレビュー
+   =========================================== */
+.memoInputArea {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.memoTitleInput,
+.memoContentInput {
+  padding: 12px 16px;
+  border: 2px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: all var(--transition-fast);
+}
+
+.memoTitleInput:focus,
+.memoContentInput:focus {
+  outline: none;
+  border-color: var(--teal-400);
+}
+
+.memoContentInput {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.memoAddBtn {
+  padding: 12px 20px;
+  background: var(--teal-400);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-weight: 700;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: all var(--transition-fast);
+}
+
+.memoAddBtn:hover {
+  background: var(--teal-500);
+}
+
+.memoEmpty {
+  text-align: center;
+  color: var(--slate-400);
+  padding: 24px;
+}
+
+.memoList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.memoCard {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  border: 1px solid var(--slate-200);
+  box-shadow: var(--shadow-sm);
+}
+
+.memoHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.memoTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--teal-800);
+}
+
+.memoDeleteBtn {
+  padding: 4px 10px;
+  background: var(--danger-light);
+  color: var(--danger);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.memoBody {
+  color: var(--slate-600);
+  font-size: 0.9rem;
+  margin: 0 0 8px 0;
+  line-height: 1.6;
+}
+
+.memoDate {
+  font-size: 0.75rem;
+  color: var(--slate-400);
+}
+
+/* ===========================================
+   フォームプレビュー
+   =========================================== */
+.formPreview {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formGroup label {
+  font-weight: 700;
+  color: var(--teal-700);
+  font-size: 0.9rem;
+}
+
+.formGroup input {
+  padding: 14px 18px;
+  border: 2px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all var(--transition-fast);
+}
+
+.formGroup input:focus {
+  outline: none;
+  border-color: var(--teal-400);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+}
+
+.formGroup input.inputError {
+  border-color: var(--danger);
+}
+
+.errorText {
+  color: var(--danger);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.formActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.submitBtn {
+  padding: 14px 28px;
+  background: var(--teal-400);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.submitBtn:hover {
+  background: var(--teal-500);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-teal);
+}
+
+.resetBtn {
+  padding: 14px 28px;
+  background: var(--slate-100);
+  color: var(--slate-600);
+  border: 2px solid var(--slate-300);
+  border-radius: var(--radius-lg);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.resetBtn:hover {
+  background: var(--slate-200);
+}
+
+.successMessage {
+  padding: 18px;
+  background: var(--success-light);
+  color: #065f46;
+  border-radius: var(--radius-lg);
+  font-weight: 700;
+  text-align: center;
+  border: 2px solid var(--success);
+}
+
+/* ===========================================
+   フェッチプレビュー
+   =========================================== */
+.loadingSpinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 48px;
+}
+
+.spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid var(--slate-200);
+  border-top-color: var(--teal-500);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.errorDisplay {
+  text-align: center;
+  padding: 32px;
+}
+
+.retryBtn,
+.refreshBtn {
+  padding: 12px 24px;
+  background: var(--teal-400);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.retryBtn:hover,
+.refreshBtn:hover {
+  background: var(--teal-500);
+  transform: translateY(-2px);
+}
+
+.fetchHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.fetchHeader h4 {
+  margin: 0;
+  color: var(--teal-800);
+  font-weight: 700;
+}
+
+.userList {
+  list-style: none;
+}
+
+.userItem {
+  padding: 18px;
+  background: var(--slate-50);
+  border-radius: var(--radius-lg);
+  margin-bottom: 14px;
+  border: 1px solid var(--slate-100);
+  transition: all var(--transition-fast);
+}
+
+.userItem:hover {
+  border-color: var(--teal-200);
+  box-shadow: var(--shadow-sm);
+}
+
+.userItem strong {
+  display: block;
+  color: var(--teal-800);
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.userEmail {
+  display: block;
+  color: var(--teal-500);
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.userCompany {
+  display: block;
+  color: var(--slate-500);
+  font-size: 0.85rem;
+}
+
+/* ===========================================
+   Reducerプレビュー
+   =========================================== */
+.reducerDisplay {
+  text-align: center;
+}
+
+.reducerCount {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--teal-700);
+  margin-bottom: 24px;
+}
+
+.reducerButtons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.reducerButtons button {
+  padding: 14px 24px;
+  background: var(--teal-400);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.reducerButtons button:hover {
+  background: var(--teal-500);
+  transform: translateY(-2px);
+}
+
+.reducerHistory {
+  text-align: left;
+  padding: 20px;
+  background: var(--slate-50);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--slate-100);
+}
+
+.reducerHistory h4 {
+  margin: 0 0 14px 0;
+  color: var(--teal-700);
+  font-weight: 700;
+}
+
+.historyEmpty {
+  color: var(--slate-400);
+  font-style: italic;
+}
+
+.historyList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.historyItem {
+  padding: 6px 14px;
+  background: var(--teal-400);
+  color: white;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* ===========================================
+   カスタムフックプレビュー
+   =========================================== */
+.customHookTitle {
+  margin: 0 0 24px 0;
+  font-weight: 800;
+  color: var(--teal-800);
+}
+
+.customHookSection {
+  padding: 20px;
+  background: var(--slate-50);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--slate-100);
+}
+
+.customHookSection h5 {
+  margin: 0 0 14px 0;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--teal-600);
+  font-weight: 700;
+}
+
+.customHookSectionSpaced {
+  composes: customHookSection;
+  margin-top: 16px;
+}
+
+/* カスタムフック - ダークモード対応 */
+.previewContentLight {
+  composes: previewContent;
+  background: #ffffff;
+  color: #111827;
+  transition: all 0.3s ease;
+}
+
+.previewContentDark {
+  composes: previewContent;
+  background: #1f2937;
+  color: #f3f4f6;
+  transition: all 0.3s ease;
+}
+
+.hookInput {
+  border: 1px solid #d1d5db;
+  background: #f3f4f6;
+  color: #111827;
+  padding: 8px 12px;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.hookInputDark {
+  composes: hookInput;
+  border-color: #4b5563;
+  background: #374151;
+  color: #f3f4f6;
+}
+
+.hookHint {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-top: 8px;
+}
+
+.toggleBtn {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.toggleBtnDark {
+  composes: toggleBtn;
+  background: #6366f1;
+}
+
+.counterRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.counterValue {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.counterResetBtn {
+  margin-left: 10px;
+}
+
+/* ===========================================
+   Context プレビュー - テーマ対応
+   =========================================== */
+.themeDisplayLight {
+  background: #f3f4f6;
+  color: #111827;
+  padding: 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.themeDisplayDark {
+  background: #1f2937;
+  color: #f9fafb;
+  padding: 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.themeBtnLight {
+  composes: toggleBtn;
+  margin-top: 10px;
+}
+
+.themeBtnDark {
+  composes: toggleBtnDark;
+  margin-top: 10px;
+}
+
+.nestedLight {
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 6px;
+  background: #e5e7eb;
+  color: #4b5563;
+}
+
+.nestedDark {
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 6px;
+  background: #374151;
+  color: #d1d5db;
+}
+
+.nestedHint {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* ===========================================
+   API タスクプレビュー
+   =========================================== */
+.apiTaskContainer {
+  padding: 16px;
+  font-family: sans-serif;
+}
+
+.apiTaskTitle {
+  margin: 0 0 12px;
+  color: #4f46e5;
+}
+
+.apiStatusBar {
+  background: #f0f9ff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  color: #0369a1;
+}
+
+.apiProgressTrack {
+  background: #e0e7ff;
+  border-radius: 4px;
+  height: 6px;
+  margin-top: 4px;
+  overflow: hidden;
+}
+
+.apiProgressFill {
+  background: #4f46e5;
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.apiForm {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.apiInput {
+  flex: 1;
+  padding: 8px 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.apiInput:focus {
+  border-color: #4f46e5;
+}
+
+.apiAddBtn {
+  padding: 8px 16px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.apiAddBtn:hover {
+  background: #4338ca;
+}
+
+.apiError {
+  background: #fef2f2;
+  color: #dc2626;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+}
+
+.apiEmptyText {
+  text-align: center;
+  color: #94a3b8;
+}
+
+.apiTaskList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.apiTaskItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  margin-bottom: 4px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+
+.apiTaskItemCompleted {
+  composes: apiTaskItem;
+  background: #f0fdf4;
+}
+
+.apiTaskCheckbox {
+  cursor: pointer;
+  font-size: 1.1rem;
+  user-select: none;
+}
+
+.apiTaskText {
+  flex: 1;
+  color: #1e293b;
+  font-size: 0.9rem;
+}
+
+.apiTaskTextCompleted {
+  composes: apiTaskText;
+  text-decoration: line-through;
+  color: #94a3b8;
+}
+
+.apiDeleteBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #ef4444;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.apiDeleteBtn:hover {
+  background: #fef2f2;
+}

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
+import styles from './Preview.module.css';
 
 // Step6: useContext - グローバルstate、コンテキストAPIを学ぶプレビュー
 
@@ -39,28 +40,11 @@ function ThemeDisplay() {
     const { theme, toggleTheme } = useTheme();
 
     return (
-        <div
-            className={`theme-display ${theme}`}
-            style={{
-                background: theme === 'dark' ? '#1f2937' : '#f3f4f6',
-                color: theme === 'dark' ? '#f9fafb' : '#111827',
-                padding: '20px',
-                borderRadius: '8px',
-                transition: 'all 0.3s ease'
-            }}
-        >
+        <div className={theme === 'dark' ? styles.themeDisplayDark : styles.themeDisplayLight}>
             <h4>現在のテーマ: {theme === 'dark' ? '🌙 ダーク' : '☀️ ライト'}</h4>
             <button
                 onClick={toggleTheme}
-                style={{
-                    background: theme === 'dark' ? '#6366f1' : '#4f46e5',
-                    color: 'white',
-                    border: 'none',
-                    padding: '10px 20px',
-                    borderRadius: '6px',
-                    cursor: 'pointer',
-                    marginTop: '10px'
-                }}
+                className={theme === 'dark' ? styles.themeBtnDark : styles.themeBtnLight}
             >
                 テーマを切り替え
             </button>
@@ -73,17 +57,9 @@ function NestedComponent() {
     const { theme } = useTheme();
 
     return (
-        <div
-            style={{
-                marginTop: '15px',
-                padding: '15px',
-                borderRadius: '6px',
-                background: theme === 'dark' ? '#374151' : '#e5e7eb',
-                color: theme === 'dark' ? '#d1d5db' : '#4b5563'
-            }}
-        >
+        <div className={theme === 'dark' ? styles.nestedDark : styles.nestedLight}>
             <p>👶 ネストされた子コンポーネント</p>
-            <p style={{ fontSize: '0.85rem', opacity: 0.8 }}>
+            <p className={styles.nestedHint}>
                 propsを使わずにテーマを取得しています
             </p>
         </div>
@@ -92,7 +68,7 @@ function NestedComponent() {
 
 function ContextPreview() {
     return (
-        <div className="preview-content">
+        <div className={styles.previewContent}>
             <ThemeProvider>
                 <ThemeDisplay />
                 <NestedComponent />

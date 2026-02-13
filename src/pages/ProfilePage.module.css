@@ -1,0 +1,532 @@
+/* ===========================================
+   Profile Page
+   =========================================== */
+.profilePage {
+  padding: 32px 20px;
+  min-height: calc(100vh - 80px);
+  overflow-y: auto;
+  background: #f7fafc;
+}
+
+.profileContainer {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* --- Hero Section --- */
+.profileHero {
+  /* wrapper for potential animation */
+}
+
+.profileCard {
+  background: linear-gradient(135deg, white 0%, var(--mint-50) 100%);
+  border-radius: var(--radius-xl);
+  padding: 32px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--teal-100);
+  box-shadow: var(--shadow-teal);
+  position: relative;
+  overflow: hidden;
+}
+
+.profileCard::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Utility classes */
+.dFlex {
+  display: flex;
+}
+
+.alignCenter {
+  align-items: center;
+}
+
+.gap24 {
+  gap: 24px;
+}
+
+.flex1 {
+  flex: 1;
+  min-width: 0;
+}
+
+/* --- Avatar & Info --- */
+.profileAvatarLarge {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal-400), var(--mint-500));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: white;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
+  flex-shrink: 0;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.profileUsername {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--teal-800);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.profileRankBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 14px;
+  background: var(--mint-100);
+  color: var(--teal-600);
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  align-self: flex-start;
+}
+
+/* --- Points --- */
+.profileTotalPtLarge {
+  text-align: right;
+}
+
+.ptLabel {
+  font-size: 0.8rem;
+  color: var(--slate-400);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.ptValueLarge {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--warning);
+  line-height: 1;
+}
+
+.ptValueLarge .ptUnit {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--slate-400);
+  margin-left: 2px;
+}
+
+/* --- Stats Grid --- */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.statCardBento {
+  background: white;
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  border: 1px solid var(--slate-100);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.statCardBento:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--teal-100);
+}
+
+.statIconLarge {
+  font-size: 1.6rem;
+  background: var(--mint-50);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+}
+
+.statValueLarge {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--teal-800);
+  line-height: 1.1;
+}
+
+/* --- Content Stack --- */
+.contentStack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sectionCard {
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 28px 32px;
+  border: 1px solid var(--slate-100);
+  box-shadow: var(--shadow-sm);
+}
+
+.sectionHeader {
+  margin-bottom: 20px;
+}
+
+.sectionHeader h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--teal-800);
+  margin: 0 0 4px 0;
+}
+
+.sectionHeader p {
+  color: var(--slate-400);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* --- Split Section --- */
+.splitSection {
+  display: flex;
+  gap: 20px;
+}
+
+/* --- Achievements --- */
+.achievementsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.achievementCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--slate-100);
+  background: var(--slate-50);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.unlocked {
+  background: var(--mint-50);
+  border-color: var(--teal-200);
+}
+
+.locked {
+  opacity: 0.5;
+}
+
+.achievementIcon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.achievementDetails strong {
+  font-size: 0.9rem;
+  color: var(--teal-800);
+}
+
+.achievementDetails p {
+  font-size: 0.75rem;
+  color: var(--slate-500);
+  margin: 2px 0 0;
+}
+
+.unlockedBadge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: var(--teal-500);
+  color: white;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 900;
+  border: 2px solid white;
+}
+
+/* --- Pt History --- */
+.ptHistoryList {
+  display: flex;
+  flex-direction: column;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.ptHistoryItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--slate-100);
+  transition: background var(--transition-fast);
+}
+
+.ptHistoryItem:last-child {
+  border-bottom: none;
+}
+
+.ptHistoryItem:hover {
+  background: var(--slate-50);
+}
+
+.historyMain {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ptHistoryReason {
+  font-weight: 600;
+  color: var(--slate-700);
+  font-size: 0.9rem;
+}
+
+.ptHistoryAmount {
+  font-weight: 800;
+  color: var(--warning);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.ptHistoryDate {
+  font-size: 0.75rem;
+  color: var(--slate-400);
+}
+
+.noHistory {
+  text-align: center;
+  color: var(--slate-400);
+  padding: 32px;
+  font-size: 0.9rem;
+}
+
+/* --- Step Stats --- */
+.stepStatsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.stepStatItem {
+  padding: 14px 16px;
+  background: var(--slate-50);
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast);
+}
+
+.stepStatItem:hover {
+  background: var(--mint-50);
+}
+
+.stepStatHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.stepStatTitle {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--teal-800);
+}
+
+.stepAccuracy {
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.high {
+  background: var(--success-light);
+  color: #065f46;
+}
+
+.medium {
+  background: var(--warning-light);
+  color: #92400e;
+}
+
+.low {
+  background: var(--danger-light);
+  color: #991b1b;
+}
+
+.stepStatDetails {
+  display: flex;
+  gap: 16px;
+  font-size: 0.8rem;
+  color: var(--slate-500);
+  margin-bottom: 8px;
+}
+
+.stepStatBar {
+  height: 6px;
+  background: var(--slate-200);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.stepStatFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--teal-400), var(--mint-500));
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+/* --- Mascot Selector (Profile overrides) --- */
+.mascotSelector {
+  /* override any dashboard-specific styling */
+}
+
+.selectorTitle {
+  display: none;
+  /* section-header handles this */
+}
+
+.selectorDescription {
+  display: none;
+}
+
+.mascotGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.mascotOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--slate-50);
+  border: 2px solid var(--slate-100);
+  border-radius: var(--radius-lg);
+  padding: 16px 12px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.mascotOption:hover {
+  border-color: var(--teal-300);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-sm);
+}
+
+.selected {
+  border-color: var(--teal-500);
+  background: var(--mint-50);
+  box-shadow: var(--shadow-teal);
+}
+
+.mascotOptionImage img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
+.mascotName {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--teal-800);
+}
+
+.mascotDesc {
+  display: none;
+}
+
+.selectedBadge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: var(--teal-500);
+  color: white;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 900;
+  border: 2px solid white;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .profilePage {
+    padding: 20px 12px;
+  }
+
+  .profileCard {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    padding: 24px;
+  }
+
+  .profileCard .dFlex {
+    flex-direction: column;
+  }
+
+  .profileRankBadge {
+    align-self: center;
+  }
+
+  .profileTotalPtLarge {
+    text-align: center;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .splitSection {
+    flex-direction: column;
+  }
+
+  .mascotGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .achievementsGrid {
+    grid-template-columns: 1fr;
+  }
+}

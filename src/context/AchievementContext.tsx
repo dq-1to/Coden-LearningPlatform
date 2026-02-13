@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect, ReactNode } from 'react
 import { Achievement, AchievementContextType } from '../types';
 import { useAuth } from '../hooks/useAuth';
 import { achievementService } from '../services/achievementService';
+import styles from './AchievementToast.module.css';
 
 // 利用可能な実績の定義
 export const ACHIEVEMENTS: Achievement[] = [
@@ -94,12 +95,12 @@ export function AchievementProvider({ children }: AchievementProviderProps) {
             {children}
             {/* 実績解除通知 */}
             {newlyUnlocked && (
-                <div className="achievement-notification">
-                    <div className="achievement-toast">
-                        <span className="achievement-icon">
+                <div className={styles.achievementNotification}>
+                    <div className={styles.achievementToast}>
+                        <span className={styles.achievementIcon}>
                             {ACHIEVEMENTS.find(a => a.id === newlyUnlocked)?.icon}
                         </span>
-                        <div className="achievement-info">
+                        <div className={styles.achievementInfo}>
                             <strong>実績解除！</strong>
                             <span>{ACHIEVEMENTS.find(a => a.id === newlyUnlocked)?.title}</span>
                         </div>

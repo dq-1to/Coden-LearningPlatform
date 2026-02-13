@@ -1,0 +1,169 @@
+/* ===========================================
+   LearningView - モード切り替え & レイアウト
+   =========================================== */
+
+/* モード切り替えタブ */
+.modeTabs {
+  display: flex;
+  gap: 12px;
+  padding: 20px 32px;
+  background: white;
+  border-bottom: 1px solid var(--teal-50);
+}
+
+.modeTab {
+  padding: 14px 28px;
+  background: white;
+  color: var(--slate-400);
+  border: 2px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modeTab:hover {
+  border-color: var(--teal-300);
+  color: var(--teal-600);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.modeTab.active {
+  background: var(--mint-100);
+  border-color: var(--teal-400);
+  color: var(--teal-700);
+  box-shadow: var(--shadow-teal);
+}
+
+.modeTab:focus-visible {
+  outline: 2px solid var(--teal-400);
+  outline-offset: 2px;
+}
+
+/* テストモードレイアウト */
+.contentTest {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  padding: 24px 32px;
+  gap: 24px;
+  background: #fdfdfd;
+}
+
+.testLeft {
+  flex: 1;
+  overflow-y: auto;
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  border: 1px solid var(--teal-50);
+  box-shadow: var(--shadow-sm);
+}
+
+.testRight {
+  width: 420px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 閲覧モードのヒントボックス */
+.viewModeHint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, var(--mint-50) 0%, white 100%);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--teal-50);
+}
+
+.hintBoxLarge {
+  text-align: center;
+  padding: 48px;
+  max-width: 340px;
+}
+
+.hintIcon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.hintBoxLarge h4 {
+  margin: 0 0 12px 0;
+  color: var(--teal-800);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.hintBoxLarge p {
+  margin: 0 0 28px 0;
+  color: var(--slate-500);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.startPracticeBtn {
+  padding: 16px 32px;
+  background: var(--teal-400);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-teal);
+}
+
+.startPracticeBtn:hover {
+  background: var(--teal-500);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ===========================================
+   レスポンシブ
+   =========================================== */
+
+@media (max-width: 768px) {
+  .modeTabs {
+    padding: 12px 16px;
+    gap: 8px;
+  }
+
+  .modeTab {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modeTabs {
+    padding: 8px 12px;
+    gap: 4px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+
+  .modeTab {
+    padding: 10px 12px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-height: 44px;
+  }
+
+  .startPracticeBtn {
+    min-height: 48px;
+    font-size: 1rem;
+  }
+}

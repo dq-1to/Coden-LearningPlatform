@@ -1,6 +1,7 @@
 // 学習フレーム層 - プレビューエリア
 // ステップに応じた実行プレビューを切り替え表示
 
+import styles from './PreviewArea.module.css';
 import CounterPreview from './previews/CounterPreview';
 import TodoPreview from './previews/TodoPreview';
 import MemoPreview from './previews/MemoPreview';
@@ -61,14 +62,14 @@ function PreviewArea({ stepId, isCompleted }: PreviewAreaProps) {
     };
 
     return (
-        <div className="preview-area">
-            <div className="preview-header">
-                <h3 className="section-title">🎮 動作プレビュー</h3>
+        <div className={styles.previewArea}>
+            <div className={styles.previewHeader}>
+                <h3 className={styles.sectionTitle}>🎮 動作プレビュー</h3>
                 {isCompleted && (
-                    <span className="completed-badge">✓ 完了済み</span>
+                    <span className={styles.completedBadge}>✓ 完了済み</span>
                 )}
             </div>
-            <div className="preview-container">
+            <div className={styles.previewContainer}>
                 {renderPreview()}
             </div>
         </div>

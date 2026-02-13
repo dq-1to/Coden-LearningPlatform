@@ -1,4 +1,5 @@
 import { useStats } from '../../context/StatsContext';
+import styles from '../../pages/Dashboard.module.css';
 
 function LearningStatusCard() {
     const { stats } = useStats();
@@ -21,32 +22,32 @@ function LearningStatusCard() {
     };
 
     return (
-        <section className="learning-status-card">
-            <h3 className="status-header">学習ステータス</h3>
-            <div className="status-items">
-                <div className="status-item">
-                    <div className="status-icon-label">
-                        <span className="status-icon">⏱️</span>
-                        <span className="status-label">合計時間</span>
+        <section className={styles.learningStatusCard}>
+            <h3 className={styles.statusHeader}>学習ステータス</h3>
+            <div className={styles.statusItems}>
+                <div className={styles.statusItem}>
+                    <div className={styles.statusIconLabel}>
+                        <span className={styles.statusIcon}>⏱️</span>
+                        <span className={styles.statusLabel}>合計時間</span>
                     </div>
-                    <span className="status-value">{formatTime(stats.totalTime)}</span>
+                    <span className={styles.statusValue}>{formatTime(stats.totalTime)}</span>
                 </div>
-                <div className="status-item">
-                    <div className="status-icon-label">
-                        <span className="status-icon">🏅</span>
-                        <span className="status-label">取得資格</span>
+                <div className={styles.statusItem}>
+                    <div className={styles.statusIconLabel}>
+                        <span className={styles.statusIcon}>🏅</span>
+                        <span className={styles.statusLabel}>取得資格</span>
                     </div>
-                    <span className="status-value">{Math.floor(stats.correctAnswers / 10)}</span>
+                    <span className={styles.statusValue}>{Math.floor(stats.correctAnswers / 10)}</span>
                 </div>
-                <div className="status-item">
-                    <div className="status-icon-label">
-                        <span className="status-icon">🎖️</span>
-                        <span className="status-label">ランク</span>
+                <div className={styles.statusItem}>
+                    <div className={styles.statusIconLabel}>
+                        <span className={styles.statusIcon}>🎖️</span>
+                        <span className={styles.statusLabel}>ランク</span>
                     </div>
-                    <span className="status-value">{getRank()}</span>
+                    <span className={styles.statusValue}>{getRank()}</span>
                 </div>
             </div>
-            <div className="status-decoration">🎖️</div>
+            <div className={styles.statusDecoration}>🎖️</div>
         </section>
     );
 }

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import styles from './Preview.module.css';
 
 // Step5: APIフェッチ - useEffect + fetch、ローディング状態を学ぶプレビュー
 
@@ -45,9 +46,9 @@ function FetchPreview() {
 
     if (loading) {
         return (
-            <div className="preview-content">
-                <div className="loading-spinner">
-                    <div className="spinner"></div>
+            <div className={styles.previewContent}>
+                <div className={styles.loadingSpinner}>
+                    <div className={styles.spinner}></div>
                     <p>読み込み中...</p>
                 </div>
             </div>
@@ -56,27 +57,27 @@ function FetchPreview() {
 
     if (error) {
         return (
-            <div className="preview-content">
-                <div className="error-display">
+            <div className={styles.previewContent}>
+                <div className={styles.errorDisplay}>
                     <p>❌ エラー: {error}</p>
-                    <button onClick={fetchUsers} className="retry-btn">再試行</button>
+                    <button onClick={fetchUsers} className={styles.retryBtn}>再試行</button>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="preview-content">
-            <div className="fetch-header">
+        <div className={styles.previewContent}>
+            <div className={styles.fetchHeader}>
                 <h4>ユーザー一覧</h4>
-                <button onClick={fetchUsers} className="refresh-btn">🔄 更新</button>
+                <button onClick={fetchUsers} className={styles.refreshBtn}>🔄 更新</button>
             </div>
-            <ul className="user-list">
+            <ul className={styles.userList}>
                 {users.map(user => (
-                    <li key={user.id} className="user-item">
+                    <li key={user.id} className={styles.userItem}>
                         <strong>{user.name}</strong>
-                        <span className="user-email">{user.email}</span>
-                        <span className="user-company">🏢 {user.company.name}</span>
+                        <span className={styles.userEmail}>{user.email}</span>
+                        <span className={styles.userCompany}>🏢 {user.company.name}</span>
                     </li>
                 ))}
             </ul>

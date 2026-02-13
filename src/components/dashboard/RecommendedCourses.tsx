@@ -1,4 +1,5 @@
 import { Step, Course } from '../../types';
+import styles from '../../pages/Dashboard.module.css';
 
 interface RecommendedCoursesProps {
     courses: Course[];
@@ -24,26 +25,26 @@ function RecommendedCourses({ courses, steps, completedSteps, onSelectStep }: Re
     }
 
     return (
-        <section className="recommended-section">
-            <h2 className="section-header">次におすすめ</h2>
-            <div className="recommended-list">
+        <section className={styles.recommendedSection}>
+            <h2 className={styles.sectionHeader}>次におすすめ</h2>
+            <div className={styles.recommendedList}>
                 {recommendations.slice(0, 3).map(({ course, nextStep }) => (
                     <div
                         key={nextStep!.id}
-                        className="recommended-card"
+                        className={styles.recommendedCard}
                         onClick={() => onSelectStep(nextStep!.id)}
                     >
                         <div
-                            className="recommended-icon-wrapper"
+                            className={styles.recommendedIconWrapper}
                             style={{ backgroundColor: `${course.color}20` }}
                         >
-                            <span className="recommended-icon" style={{ color: course.color }}>
+                            <span className={styles.recommendedIcon} style={{ color: course.color }}>
                                 {course.icon}
                             </span>
                         </div>
-                        <div className="recommended-content">
-                            <h4 className="recommended-title">{nextStep!.title}</h4>
-                            <p className="recommended-description">{nextStep!.description}</p>
+                        <div className={styles.recommendedContent}>
+                            <h4 className={styles.recommendedTitle}>{nextStep!.title}</h4>
+                            <p className={styles.recommendedDescription}>{nextStep!.description}</p>
                         </div>
                     </div>
                 ))}

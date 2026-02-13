@@ -5,6 +5,7 @@ import 'prismjs/components/prism-jsx';
 import 'prismjs/components/prism-tsx';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-bash';
+import styles from './CodeBlock.module.css';
 
 interface CodeBlockProps {
     code: string;
@@ -49,27 +50,27 @@ function CodeBlock({
     const lines = code.split('\n');
 
     return (
-        <div className="code-block-wrapper">
-            <div className="code-block-header">
-                <span className="code-block-lang">{language.toUpperCase()}</span>
+        <div className={styles.codeBlockWrapper}>
+            <div className={styles.codeBlockHeader}>
+                <span className={styles.codeBlockLang}>{language.toUpperCase()}</span>
                 {showCopyButton && (
                     <button
-                        className={`code-copy-btn ${copied ? 'copied' : ''}`}
+                        className={`${styles.codeCopyBtn} ${copied ? styles.copied : ''}`}
                         onClick={handleCopy}
                     >
                         {copied ? '✓ コピー済み' : '📋 コピー'}
                     </button>
                 )}
             </div>
-            <div className="code-block-body">
+            <div className={styles.codeBlockBody}>
                 {showLineNumbers && (
-                    <div className="code-line-numbers">
+                    <div className={styles.codeLineNumbers}>
                         {lines.map((_, i) => (
                             <span key={i}>{i + 1}</span>
                         ))}
                     </div>
                 )}
-                <pre className="code-block-pre">
+                <pre className={styles.codeBlockPre}>
                     <code ref={codeRef} className={`language-${language}`}>
                         {code}
                     </code>

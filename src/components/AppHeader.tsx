@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { usePt } from '../context/PtContext';
 import { useAuth } from '../hooks/useAuth';
 import codenLogo from '../assets/icons/coden_logo.png';
+import styles from './AppHeader.module.css';
 
 interface AppHeaderProps {
     showProgress?: boolean;
@@ -23,48 +24,48 @@ function AppHeader({ showProgress = false, completedSteps = 0, totalSteps = 0, o
     };
 
     return (
-        <header className="app-header">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <header className={styles.appHeader}>
+            <div className={styles.headerLeft}>
                 {onMenuToggle && (
                     <button
-                        className="mobile-menu-btn"
+                        className={styles.mobileMenuBtn}
                         onClick={onMenuToggle}
                         aria-label="メニューを開く"
                     >
                         ☰
                     </button>
                 )}
-                <div className="header-brand" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-                    <img src={codenLogo} alt="Coden" className="header-logo" />
-                    <h1>Coden</h1>
+                <div className={styles.headerBrand} onClick={() => navigate('/')}>
+                    <img src={codenLogo} alt="Coden" className={styles.headerLogo} />
+                    <h1 className={styles.headerTitle}>Coden</h1>
                 </div>
             </div>
-            <div className="header-actions">
-                <div className="pt-badge">
-                    <span className="pt-amount">{pt.toLocaleString()} Pt</span>
-                    <span className="pt-icon">⭐</span>
+            <div className={styles.headerActions}>
+                <div className={styles.ptBadge}>
+                    <span className={styles.ptAmount}>{pt.toLocaleString()} Pt</span>
+                    <span className={styles.ptIcon}>⭐</span>
                 </div>
                 {showProgress && (
-                    <span className="progress-info">
+                    <span className={styles.progressInfo}>
                         進捗: {completedSteps} / {totalSteps} 完了
                     </span>
                 )}
-                <button className="stats-btn" onClick={() => navigate('/profile')}>
+                <button className={styles.statsBtn} onClick={() => navigate('/profile')}>
                     👤 プロフィール
                 </button>
                 {user && (
-                    <div className="user-area">
-                        <div className="user-profile-chip">
-                            <div className="user-avatar">
+                    <div className={styles.userArea}>
+                        <div className={styles.userProfileChip}>
+                            <div className={styles.userAvatar}>
                                 {username.charAt(0).toUpperCase()}
                             </div>
-                            <span className="user-name">
+                            <span className={styles.userName}>
                                 {username}
                             </span>
                         </div>
                         <button
                             onClick={handleSignOut}
-                            className="logout-btn"
+                            className={styles.logoutBtn}
                         >
                             ログアウト
                         </button>
