@@ -1,6 +1,7 @@
 import { useState, useEffect, KeyboardEvent } from 'react';
 import { exercises } from '../data/exercises';
 import { useStats } from '../context/StatsContext';
+import styles from './PracticeArea.module.css';
 
 // 練習エリアコンポーネント
 // 穴埋め形式でコードを書いて練習する
@@ -42,8 +43,8 @@ function PracticeArea({ stepId, onAllComplete }: PracticeAreaProps) {
     // 問題がない場合
     if (!currentExercise) {
         return (
-            <div className="practice-area">
-                <p className="practice-empty">このステップの練習問題はありません</p>
+            <div className={styles.practiceArea}>
+                <p className={styles.practiceEmpty}>このステップの練習問題はありません</p>
             </div>
         );
     }
@@ -110,7 +111,7 @@ function PracticeArea({ stepId, onAllComplete }: PracticeAreaProps) {
     const renderTemplate = () => {
         const parts = currentExercise.template.split('______');
         return (
-            <div className="code-template">
+            <div className={styles.codeTemplate}>
                 <code>
                     {parts[0]}
                     <input
@@ -120,7 +121,7 @@ function PracticeArea({ stepId, onAllComplete }: PracticeAreaProps) {
                             setUserAnswer(e.target.value);
                             setShowResult(false);
                         }}
-                        className={`answer-input ${showResult ? (isCorrect ? 'correct' : 'incorrect') : ''}`}
+                        className={`${styles.answerInput} ${showResult ? (isCorrect ? styles.correct : styles.incorrect) : ''}`}
                         placeholder="ここに入力"
                         onKeyDown={handleKeyDown}
                     />
@@ -133,37 +134,37 @@ function PracticeArea({ stepId, onAllComplete }: PracticeAreaProps) {
     const allSolved = solvedQuestions.length === stepExercises.length;
 
     return (
-        <div className="practice-area">
+        <div className={styles.practiceArea}>
             {/* 進捗表示 */}
-            <div className="practice-header">
-                <span className="practice-progress">
+            <div className={styles.practiceHeader}>
+                <span className={styles.practiceProgress}>
                     練習 {currentIndex + 1} / {stepExercises.length}
-                    <span className="solved-count">
+                    <span className={styles.solvedCount}>
                         （正解: {solvedQuestions.length}/{stepExercises.length}）
                     </span>
                 </span>
-                <h4 className="practice-title">{currentExercise.title}</h4>
+                <h4 className={styles.practiceTitle}>{currentExercise.title}</h4>
             </div>
 
             {/* 全問正解メッセージ */}
             {allSolved && (
-                <div className="all-complete-message">
+                <div className={styles.allCompleteMessage}>
                     🎉 全問正解！ステップテストへ進みます...
                 </div>
             )}
 
             {/* 問題説明 */}
-            <p className="practice-description">{currentExercise.description}</p>
+            <p className={styles.practiceDescription}>{currentExercise.description}</p>
 
             {/* ヒント: Ctrl+Enter */}
-            <p className="keyboard-hint">💡 Ctrl + Enter で回答を確認</p>
+            <p className={styles.keyboardHint}>💡 Ctrl + Enter で回答を確認</p>
 
             {/* コードテンプレート */}
             {renderTemplate()}
 
             {/* 結果表示 */}
             {showResult && (
-                <div className={`result-message ${isCorrect ? 'correct' : 'incorrect'}`}>
+                <div className={`${styles.resultMessage} ${isCorrect ? styles.correct : styles.incorrect}`}>
                     {isCorrect ? (
                         <span>🎉 正解です！</span>
                     ) : (
@@ -174,53 +175,53 @@ function PracticeArea({ stepId, onAllComplete }: PracticeAreaProps) {
 
             {/* ヒント表示 */}
             {showHint && (
-                <div className="hint-box">
+                <div className={styles.hintBox}>
                     💡 ヒント: {currentExercise.hint}
                 </div>
             )}
 
             {/* 答え表示 */}
             {showAnswer && (
-                <div className="answer-box">
+                <div className={styles.answerBox}>
                     ✅ 答え: <code>{currentExercise.answer}</code>
                 </div>
             )}
 
             {/* ボタン群 */}
-            <div className="practice-actions">
+            <div className={styles.practiceActions}>
                 <button
                     onClick={() => setShowHint(!showHint)}
-                    className="hint-btn"
+                    className={styles.hintBtn}
                 >
                     {showHint ? 'ヒントを隠す' : 'ヒント'}
                 </button>
                 <button
                     onClick={() => setShowAnswer(!showAnswer)}
-                    className="show-answer-btn"
+                    className={styles.showAnswerBtn}
                 >
                     {showAnswer ? '答えを隠す' : '答えを見る'}
                 </button>
                 <button
                     onClick={checkAnswer}
-                    className="check-btn"
+                    className={styles.checkBtn}
                 >
                     確認
                 </button>
             </div>
 
             {/* ナビゲーション */}
-            <div className="practice-nav">
+            <div className={styles.practiceNav}>
                 <button
                     onClick={goPrev}
                     disabled={currentIndex === 0}
-                    className="nav-btn"
+                    className={styles.navBtn}
                 >
                     ← 前へ
                 </button>
                 <button
                     onClick={goNext}
                     disabled={currentIndex === stepExercises.length - 1}
-                    className="nav-btn"
+                    className={styles.navBtn}
                 >
                     次へ →
                 </button>

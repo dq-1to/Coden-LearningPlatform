@@ -117,6 +117,24 @@ export interface PtEvent {
     timestamp: string;
 }
 
+// Supabase learning_stats テーブルの更新用型
+export interface LearningStatsUpdate {
+    total_study_time?: number;
+    total_correct?: number;
+    total_wrong?: number;
+    streak_days?: number;
+    last_study_date?: string;
+}
+
+// Supabase step_progress テーブルの更新用型
+export interface StepProgressUpdate {
+    attempts: number;
+    errors: number;
+    best_time: number | null;
+    last_attempt_at: string;
+    is_completed?: boolean;
+}
+
 // 自由記述チャレンジの型定義
 export interface Challenge {
     id: string;

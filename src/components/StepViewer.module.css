@@ -1,0 +1,273 @@
+/* ===========================================
+   StepViewer - CSS Module
+   =========================================== */
+
+.stepViewer {
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  border: 1px solid var(--teal-50);
+  box-shadow: var(--shadow-sm);
+}
+
+.stepViewer:hover {
+  box-shadow: var(--shadow-md);
+  transition: box-shadow var(--transition-normal);
+}
+
+.sectionTitle {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--teal-800);
+  margin: 0 0 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.explanationContent {
+  background: var(--slate-50);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 20px;
+  border: 1px solid var(--slate-100);
+}
+
+.explanationText {
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.9;
+  color: var(--slate-700);
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.docLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--teal-600);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  padding: 12px 20px;
+  background: var(--mint-50);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-fast);
+}
+
+.docLink:hover {
+  background: var(--mint-100);
+  color: var(--teal-700);
+  transform: translateX(4px);
+}
+
+/* ===========================================
+   閲覧モードのヒントボックス
+   =========================================== */
+.viewModeHint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, var(--mint-50) 0%, white 100%);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--teal-50);
+}
+
+.hintBoxLarge {
+  text-align: center;
+  padding: 48px;
+  max-width: 340px;
+}
+
+.hintIcon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.hintBoxLarge h4 {
+  margin: 0 0 12px 0;
+  color: var(--teal-800);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.hintBoxLarge p {
+  margin: 0 0 28px 0;
+  color: var(--slate-500);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.startPracticeBtn {
+  padding: 16px 32px;
+  background: var(--teal-400);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-teal);
+}
+
+.startPracticeBtn:hover {
+  background: var(--teal-500);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ===========================================
+   StepViewer parser styles
+   =========================================== */
+.codeSection {
+  margin-top: 28px;
+}
+
+.explanationSectionBlock {
+  margin-bottom: 16px;
+}
+
+.explanationSubtitle {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--teal-700);
+  margin: 0 0 10px 0;
+  padding: 8px 14px;
+  background: var(--mint-50);
+  border-left: 4px solid var(--teal-400);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.explanationBody {
+  padding: 0 4px;
+}
+
+.explanationParagraph {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--slate-700);
+  margin: 4px 0;
+}
+
+.explanationListItem {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--slate-700);
+  list-style: none;
+  padding-left: 20px;
+  position: relative;
+}
+
+.explanationListItem::before {
+  content: '\2022';
+  position: absolute;
+  left: 4px;
+  color: var(--teal-400);
+  font-weight: 900;
+}
+
+.inlineCodeLine {
+  display: block;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--teal-700);
+  background: var(--slate-50);
+  padding: 2px 12px;
+  margin: 2px 0;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--teal-200);
+}
+
+/* ===========================================
+   Markdown styles
+   =========================================== */
+.explanationMarkdown h1,
+.explanationMarkdown h2,
+.explanationMarkdown h3,
+.explanationMarkdown h4 {
+  color: #1e293b;
+  margin: 1em 0 0.5em;
+}
+
+.explanationMarkdown h2 {
+  font-size: 1.2rem;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 4px;
+}
+
+.explanationMarkdown h3 {
+  font-size: 1.05rem;
+}
+
+.explanationMarkdown p {
+  margin: 0.5em 0;
+  line-height: 1.8;
+  color: #334155;
+}
+
+.explanationMarkdown ul,
+.explanationMarkdown ol {
+  padding-left: 1.5em;
+  margin: 0.5em 0;
+}
+
+.explanationMarkdown li {
+  margin: 0.3em 0;
+  line-height: 1.6;
+  color: #475569;
+}
+
+.inlineCode {
+  background: #f1f5f9;
+  color: #e11d48;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.88em;
+}
+
+.explanationMarkdown table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.8em 0;
+  font-size: 0.9rem;
+}
+
+.explanationMarkdown th,
+.explanationMarkdown td {
+  border: 1px solid #e2e8f0;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.explanationMarkdown th {
+  background: #f8fafc;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.explanationMarkdown blockquote {
+  border-left: 4px solid #4f46e5;
+  background: #f0f9ff;
+  padding: 8px 16px;
+  margin: 0.8em 0;
+  border-radius: 0 8px 8px 0;
+  color: #1e40af;
+}
+
+/* ===========================================
+   Responsive: 480px
+   =========================================== */
+@media (max-width: 480px) {
+  .stepViewer {
+    padding: 20px;
+  }
+
+  .explanationSubtitle {
+    font-size: 0.95rem;
+  }
+}

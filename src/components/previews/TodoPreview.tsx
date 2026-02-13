@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styles from './Preview.module.css';
 
 // Step2: ToDoリスト - 配列state・map・propsを学ぶプレビュー
 
@@ -36,32 +37,32 @@ function TodoPreview() {
     };
 
     return (
-        <div className="preview-content">
-            <div className="todo-input-area">
+        <div className={styles.previewContent}>
+            <div className={styles.todoInputArea}>
                 <input
                     type="text"
-                    className="todo-input"
+                    className={styles.todoInput}
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
                     placeholder="新しいToDoを入力"
                     onKeyDown={(e) => e.key === 'Enter' && addTodo()}
                 />
-                <button className="todo-add-btn" onClick={addTodo}>追加</button>
+                <button className={styles.todoAddBtn} onClick={addTodo}>追加</button>
             </div>
             {todos.length === 0 ? (
-                <p className="todo-empty">ToDoがありません</p>
+                <p className={styles.todoEmpty}>ToDoがありません</p>
             ) : (
-                <ul className="todo-list">
+                <ul className={styles.todoList}>
                     {todos.map((todo) => (
-                        <li key={todo.id} className="todo-item">
+                        <li key={todo.id} className={styles.todoItem}>
                             <span
-                                className={`todo-text ${todo.completed ? 'completed' : ''}`}
+                                className={todo.completed ? styles.todoTextCompleted : styles.todoText}
                                 onClick={() => toggleTodo(todo.id)}
                             >
                                 {todo.text}
                             </span>
                             <button
-                                className="todo-delete-btn"
+                                className={styles.todoDeleteBtn}
                                 onClick={() => deleteTodo(todo.id)}
                             >
                                 削除

@@ -43,11 +43,6 @@ export function StatsProvider({ children }: StatsProviderProps) {
         loadStats();
     }, [user]);
 
-    // Save effect is removed in favor of direct updates in handlers to ensure better control
-    // or we can keep it if we want to throttle updates.
-    // Spec says: "Update: Change to upsert to Supabase together with setStats."
-    // So distinct updates in handlers are better.
-
     // 連続学習日数の更新
     useEffect(() => {
         if (!user) return;

@@ -1,0 +1,50 @@
+/* ===========================================
+   PreviewArea - CSS Module
+   =========================================== */
+
+.previewArea {
+  background: white;
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--teal-50);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.previewHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, var(--mint-100) 0%, var(--soft-blue) 100%);
+  border-bottom: 1px solid var(--teal-100);
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--teal-800);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.completedBadge {
+  background: var(--teal-500);
+  color: white;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.previewContainer {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+  background: var(--slate-50);
+}
+

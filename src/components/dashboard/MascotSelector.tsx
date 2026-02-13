@@ -1,4 +1,5 @@
 import { useMascot, MASCOTS, MascotType } from '../../context/MascotContext';
+import styles from '../../pages/Dashboard.module.css';
 
 // マスコット画像のインポート
 import mascotGreen from '../../assets/icons/mascot.png';
@@ -20,25 +21,25 @@ function MascotSelector() {
     const { currentMascot, setMascot } = useMascot();
 
     return (
-        <div className="mascot-selector">
-            <h3 className="selector-title">🎨 マスコットを選ぶ</h3>
-            <p className="selector-description">お気に入りのマスコットを選んでね！</p>
-            <div className="mascot-grid">
+        <div className={styles.mascotSelector}>
+            <h3 className={styles.selectorTitle}>🎨 マスコットを選ぶ</h3>
+            <p className={styles.selectorDescription}>お気に入りのマスコットを選んでね！</p>
+            <div className={styles.mascotGrid}>
                 {MASCOTS.map((mascot) => (
                     <button
                         key={mascot.id}
-                        className={`mascot-option ${currentMascot === mascot.id ? 'selected' : ''}`}
+                        className={`${styles.mascotOption} ${currentMascot === mascot.id ? styles.selected : ''}`}
                         onClick={() => setMascot(mascot.id as MascotType)}
                     >
-                        <div className="mascot-option-image">
+                        <div className={styles.mascotOptionImage}>
                             <img src={mascotImages[mascot.id]} alt={mascot.name} />
                         </div>
-                        <div className="mascot-option-info">
-                            <span className="mascot-name">{mascot.name}</span>
-                            <span className="mascot-desc">{mascot.description}</span>
+                        <div className={styles.mascotOptionInfo}>
+                            <span className={styles.mascotName}>{mascot.name}</span>
+                            <span className={styles.mascotDesc}>{mascot.description}</span>
                         </div>
                         {currentMascot === mascot.id && (
-                            <span className="selected-badge">✓</span>
+                            <span className={styles.selectedBadge}>✓</span>
                         )}
                     </button>
                 ))}

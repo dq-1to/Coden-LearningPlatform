@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import styles from './Preview.module.css';
 
 // Step3: メモ／ノート - 複数stateとlocalStorageを学ぶプレビュー
 
@@ -47,41 +48,41 @@ function MemoPreview() {
     };
 
     return (
-        <div className="preview-content">
-            <div className="memo-input-area">
+        <div className={styles.previewContent}>
+            <div className={styles.memoInputArea}>
                 <input
                     type="text"
-                    className="memo-title-input"
+                    className={styles.memoTitleInput}
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="タイトル"
                 />
                 <textarea
-                    className="memo-content-input"
+                    className={styles.memoContentInput}
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     placeholder="メモの内容"
                     rows={3}
                 />
-                <button className="memo-add-btn" onClick={addMemo}>メモを追加</button>
+                <button className={styles.memoAddBtn} onClick={addMemo}>メモを追加</button>
             </div>
             {memos.length === 0 ? (
-                <p className="memo-empty">メモがありません</p>
+                <p className={styles.memoEmpty}>メモがありません</p>
             ) : (
-                <div className="memo-list">
+                <div className={styles.memoList}>
                     {memos.map((memo) => (
-                        <div key={memo.id} className="memo-card">
-                            <div className="memo-header">
-                                <h4 className="memo-title">{memo.title}</h4>
+                        <div key={memo.id} className={styles.memoCard}>
+                            <div className={styles.memoHeader}>
+                                <h4 className={styles.memoTitle}>{memo.title}</h4>
                                 <button
-                                    className="memo-delete-btn"
+                                    className={styles.memoDeleteBtn}
                                     onClick={() => deleteMemo(memo.id)}
                                 >
                                     削除
                                 </button>
                             </div>
-                            <p className="memo-body">{memo.content}</p>
-                            <span className="memo-date">{memo.createdAt}</span>
+                            <p className={styles.memoBody}>{memo.content}</p>
+                            <span className={styles.memoDate}>{memo.createdAt}</span>
                         </div>
                     ))}
                 </div>

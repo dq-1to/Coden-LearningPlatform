@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styles from './Preview.module.css';
 
 // Step4: フォームバリデーション - 複合的なstate管理と入力検証を学ぶプレビュー
 
@@ -69,9 +70,9 @@ function FormPreview() {
     };
 
     return (
-        <div className="preview-content">
-            <form onSubmit={handleSubmit} className="form-preview">
-                <div className="form-group">
+        <div className={styles.previewContent}>
+            <form onSubmit={handleSubmit} className={styles.formPreview}>
+                <div className={styles.formGroup}>
                     <label>メールアドレス</label>
                     <input
                         type="email"
@@ -79,12 +80,12 @@ function FormPreview() {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="example@email.com"
-                        className={errors.email ? 'input-error' : ''}
+                        className={errors.email ? styles.inputError : ''}
                     />
-                    {errors.email && <span className="error-text">{errors.email}</span>}
+                    {errors.email && <span className={styles.errorText}>{errors.email}</span>}
                 </div>
 
-                <div className="form-group">
+                <div className={styles.formGroup}>
                     <label>パスワード</label>
                     <input
                         type="password"
@@ -92,12 +93,12 @@ function FormPreview() {
                         value={formData.password}
                         onChange={handleChange}
                         placeholder="8文字以上"
-                        className={errors.password ? 'input-error' : ''}
+                        className={errors.password ? styles.inputError : ''}
                     />
-                    {errors.password && <span className="error-text">{errors.password}</span>}
+                    {errors.password && <span className={styles.errorText}>{errors.password}</span>}
                 </div>
 
-                <div className="form-group">
+                <div className={styles.formGroup}>
                     <label>パスワード確認</label>
                     <input
                         type="password"
@@ -105,18 +106,18 @@ function FormPreview() {
                         value={formData.confirmPassword}
                         onChange={handleChange}
                         placeholder="パスワードを再入力"
-                        className={errors.confirmPassword ? 'input-error' : ''}
+                        className={errors.confirmPassword ? styles.inputError : ''}
                     />
-                    {errors.confirmPassword && <span className="error-text">{errors.confirmPassword}</span>}
+                    {errors.confirmPassword && <span className={styles.errorText}>{errors.confirmPassword}</span>}
                 </div>
 
-                <div className="form-actions">
-                    <button type="submit" className="submit-btn">登録</button>
-                    <button type="button" className="reset-btn" onClick={resetForm}>リセット</button>
+                <div className={styles.formActions}>
+                    <button type="submit" className={styles.submitBtn}>登録</button>
+                    <button type="button" className={styles.resetBtn} onClick={resetForm}>リセット</button>
                 </div>
 
                 {submitted && (
-                    <div className="success-message">
+                    <div className={styles.successMessage}>
                         ✅ 登録成功！（デモなので実際には送信されません）
                     </div>
                 )}

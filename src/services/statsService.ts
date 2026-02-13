@@ -1,5 +1,5 @@
 import { supabase } from '../lib/supabase';
-import { LearningStats, StepStats } from '../types';
+import { LearningStats, StepStats, LearningStatsUpdate, StepProgressUpdate } from '../types';
 
 export const statsService = {
     async getStats(userId: string): Promise<LearningStats | null> {
@@ -40,13 +40,13 @@ export const statsService = {
             streakDays: statsData.streak_days,
             lastStudyDate: statsData.last_study_date || '',
             stepStats,
-            xp: 0, // Not persisted in current spec
-            studyHistory: [], // Not persisted in current spec
+            xp: 0,
+            studyHistory: [],
         };
     },
 
     async updateStats(userId: string, stats: Partial<LearningStats>) {
-        const updates: any = {};
+        const updates: LearningStatsUpdate = {};
         if (stats.totalTime !== undefined) updates.total_study_time = stats.totalTime;
         if (stats.correctAnswers !== undefined) updates.total_correct = stats.correctAnswers;
         if (stats.wrongAnswers !== undefined) updates.total_wrong = stats.wrongAnswers;
@@ -85,7 +85,7 @@ export const statsService = {
                 ? (existing.best_time ? Math.min(existing.best_time, updates.bestTime) : updates.bestTime)
                 : existing.best_time;
 
-            const updateData: any = {
+            const updateData: StepProgressUpdate = {
                 attempts: newAttempts,
                 errors: newErrors,
                 best_time: newBestTime,

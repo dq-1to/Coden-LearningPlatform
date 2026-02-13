@@ -1,0 +1,75 @@
+/* ===========================================
+   デザイントークン - Coden
+   =========================================== */
+
+/* Google Fonts - Zen Maru Gothic */
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  /* ミント/ティール系カラーパレット */
+  --mint-50: #f0fdfa;
+  --mint-100: #ccfbf1;
+  --mint-200: #99f6e4;
+  --mint-500: #14b8a6;
+  --mint-600: #0d9488;
+
+  --teal-50: #f0fdfa;
+  --teal-100: #e6fffa;
+  --teal-200: #b2f5ea;
+  --teal-300: #81e6d9;
+  --teal-400: #4fd1c5;
+  --teal-500: #38b2ac;
+  --teal-600: #319795;
+  --teal-700: #2c7a7b;
+  --teal-800: #285e61;
+
+  /* アクセントカラー */
+  --soft-blue: #e3f2fd;
+  --soft-yellow: #fff9c4;
+  --soft-pink: #fce4ec;
+
+  --accent-yellow: #fbbf24;
+  --accent-pink: #f472b6;
+
+  /* 基本カラー */
+  --success: #10b981;
+  --success-light: #d1fae5;
+  --warning: #f59e0b;
+  --warning-light: #fef3c7;
+  --danger: #ef4444;
+  --danger-light: #fee2e2;
+
+  /* テキストカラー */
+  --text-main: #2d3748;
+  --text-light: #718096;
+  --text-muted: #a0aec0;
+
+  /* グレースケール */
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+
+  /* シャドウ */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.03);
+  --shadow-teal: 0 4px 14px -3px rgba(20, 184, 166, 0.3);
+
+  /* ボーダー */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2rem;
+  --radius-full: 9999px;
+
+  /* トランジション */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+}

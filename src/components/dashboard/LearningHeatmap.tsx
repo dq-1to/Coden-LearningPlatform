@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useStats } from '../../context/StatsContext';
+import styles from '../../pages/Dashboard.module.css';
 
 function LearningHeatmap() {
     const { stats } = useStats();
@@ -44,40 +45,51 @@ function LearningHeatmap() {
         return hours > 0 ? `${hours}時間${mins > 0 ? mins + '分' : ''}` : `${mins}分`;
     };
 
+    const levelClass = (level: number) => {
+        switch (level) {
+            case 0: return styles.level0;
+            case 1: return styles.level1;
+            case 2: return styles.level2;
+            case 3: return styles.level3;
+            case 4: return styles.level4;
+            default: return styles.level0;
+        }
+    };
+
     return (
-        <section className="heatmap-section">
-            <h2 className="section-header">
-                <span className="header-icon">📅</span>
+        <section className={styles.heatmapSection}>
+            <h2 className={styles.sectionHeader}>
+                <span className={styles.headerIcon}>📅</span>
                 学習記録
             </h2>
-            <div className="heatmap-container">
-                <div className="heatmap-labels">
+            <div className={styles.heatmapContainer}>
+                <div className={styles.heatmapLabels}>
                     <span>月</span>
                     <span>水</span>
                     <span>金</span>
                 </div>
-                <div className="heatmap-grid">
+                <div className={styles.heatmapGrid}>
                     {heatmapData.map((day, index) => (
                         <div
                             key={index}
-                            className={`heatmap-cell level-${day.level}`}
+                            className={`${styles.heatmapCell} ${levelClass(day.level)}`}
                             title={`${day.date}: レベル${day.level}`}
                         />
                     ))}
                 </div>
             </div>
-            <div className="heatmap-footer">
-                <p className="monthly-total">
-                    今月の合計学習時間: <span className="time-value">{formatTime(monthlyMinutes)}</span>
+            <div className={styles.heatmapFooter}>
+                <p className={styles.monthlyTotal}>
+                    今月の合計学習時間: <span className={styles.timeValue}>{formatTime(monthlyMinutes)}</span>
                 </p>
-                <div className="heatmap-legend">
-                    <span className="legend-label">少ない</span>
-                    <div className="heatmap-cell level-0" />
-                    <div className="heatmap-cell level-1" />
-                    <div className="heatmap-cell level-2" />
-                    <div className="heatmap-cell level-3" />
-                    <div className="heatmap-cell level-4" />
-                    <span className="legend-label">多い</span>
+                <div className={styles.heatmapLegend}>
+                    <span className={styles.legendLabel}>少ない</span>
+                    <div className={`${styles.heatmapCell} ${styles.level0}`} />
+                    <div className={`${styles.heatmapCell} ${styles.level1}`} />
+                    <div className={`${styles.heatmapCell} ${styles.level2}`} />
+                    <div className={`${styles.heatmapCell} ${styles.level3}`} />
+                    <div className={`${styles.heatmapCell} ${styles.level4}`} />
+                    <span className={styles.legendLabel}>多い</span>
                 </div>
             </div>
         </section>

@@ -1,0 +1,279 @@
+/* ===========================================
+   AppHeader - CSS Module
+   =========================================== */
+
+.appHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  /* Override: dark gradient background */
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.97) 0%, rgba(44, 122, 123, 0.95) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.headerBrand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.headerBrand:hover {
+  transform: scale(1.02);
+}
+
+.headerLogo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+}
+
+.headerTitle {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--teal-700);
+  letter-spacing: -0.02em;
+  /* Override: lighter gradient for dark header */
+  background: linear-gradient(135deg, #99f6e4 0%, #5eead4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.progressInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 700;
+  /* Override: dark header variant */
+  background: rgba(255, 255, 255, 0.1);
+  color: #fde68a;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.progressInfo::after {
+  content: '\26A1';
+  font-size: 1.1rem;
+}
+
+.statsBtn,
+.backBtn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+  /* Override: dark header variant */
+  background: rgba(255, 255, 255, 0.1);
+  color: #ccfbf1;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.statsBtn:hover,
+.backBtn:hover {
+  background: var(--teal-400);
+  color: white;
+  border-color: var(--teal-400);
+  transform: scale(1.05);
+}
+
+.statsBtn:active,
+.backBtn:active {
+  transform: scale(0.97);
+}
+
+/* User area */
+.userArea {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 8px;
+}
+
+.userProfileChip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 4px 12px;
+  transition: background var(--transition-fast);
+}
+
+.userProfileChip:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.userAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: white;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.userName {
+  color: #e2e8f0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.logoutBtn {
+  padding: 6px 12px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius-sm);
+  color: #fca5a5;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: inherit;
+  transition: all var(--transition-fast);
+}
+
+.logoutBtn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #fecaca;
+  transform: translateY(-1px);
+}
+
+/* Pt badge */
+.ptBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  /* Override: dark header variant */
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.1) 100%);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  box-shadow: none;
+}
+
+.ptAmount {
+  font-size: 1rem;
+  font-weight: 800;
+  /* Override: dark header variant */
+  color: #fde68a;
+}
+
+.ptIcon {
+  font-size: 1.2rem;
+}
+
+/* Mobile menu button */
+.mobileMenuBtn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm);
+  color: #ccfbf1;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.mobileMenuBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ===========================================
+   Responsive: 768px (tablet)
+   =========================================== */
+@media (max-width: 768px) {
+  .headerTitle {
+    font-size: 1.2rem;
+  }
+
+  .headerActions {
+    gap: 8px;
+  }
+
+  .progressInfo {
+    display: none;
+  }
+
+  .userName {
+    display: none;
+  }
+
+  .mobileMenuBtn {
+    display: flex;
+  }
+}
+
+/* ===========================================
+   Responsive: 480px (mobile)
+   =========================================== */
+@media (max-width: 480px) {
+  .appHeader {
+    padding: 8px 12px;
+  }
+
+  .headerTitle {
+    font-size: 1rem;
+  }
+
+  .headerLogo {
+    width: 28px;
+    height: 28px;
+  }
+
+  .ptBadge {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+  }
+
+  .statsBtn {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    min-height: 44px;
+  }
+
+  .logoutBtn {
+    min-height: 36px;
+    padding: 6px 10px;
+  }
+}

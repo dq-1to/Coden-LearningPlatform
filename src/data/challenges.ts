@@ -410,7 +410,7 @@ export default SafeFetcher;`,
         solutionCode: `import { useState } from 'react';
 
 function SafeFetcher() {
-    const [data, setData] = useState<any[]>([]);
+    const [data, setData] = useState<{id: number; title: string}[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -422,8 +422,8 @@ function SafeFetcher() {
             if (!res.ok) throw new Error('取得に失敗');
             const json = await res.json();
             setData(json);
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err) {
+            setError(err instanceof Error ? err.message : '不明なエラー');
         } finally {
             setLoading(false);
         }
@@ -436,7 +436,7 @@ function SafeFetcher() {
             {error && <p style={{color:'red'}}>エラー: {error}</p>}
             {data.length > 0 && (
                 <ul>
-                    {data.map((item: any) => <li key={item.id}>{item.title}</li>)}
+                    {data.map(item => <li key={item.id}>{item.title}</li>)}
                 </ul>
             )}
         </div>

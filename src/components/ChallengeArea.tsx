@@ -3,6 +3,7 @@ import CodeEditor from './CodeEditor';
 import { challenges } from '../data/challenges';
 import { useAuth } from '../hooks/useAuth';
 import { submissionService } from '../services/submissionService';
+import styles from './ChallengeArea.module.css';
 
 interface ChallengeAreaProps {
     stepId: string;
@@ -21,18 +22,13 @@ function ChallengeArea({ stepId, onComplete }: ChallengeAreaProps) {
 
     if (!challenge) {
         return (
-            <div className="challenge-area" style={{ padding: '40px', textAlign: 'center' }}>
-                <div style={{
-                    background: '#f8fafc',
-                    borderRadius: '16px',
-                    padding: '32px',
-                    border: '2px dashed #e2e8f0'
-                }}>
-                    <span style={{ fontSize: '3rem' }}>🚧</span>
-                    <h3 style={{ color: '#64748b', marginTop: '12px' }}>
+            <div className={styles.challengeAreaEmpty}>
+                <div className={styles.emptyBox}>
+                    <span className={styles.emptyIcon}>🚧</span>
+                    <h3 className={styles.emptyTitle}>
                         このステップのチャレンジは準備中です
                     </h3>
-                    <p style={{ color: '#94a3b8', fontSize: '0.9rem' }}>
+                    <p className={styles.emptyDescription}>
                         閲覧・練習モードで学習を進めましょう
                     </p>
                 </div>
@@ -97,45 +93,27 @@ function ChallengeArea({ stepId, onComplete }: ChallengeAreaProps) {
     };
 
     return (
-        <div className="challenge-area" style={{ padding: '16px' }}>
+        <div className={styles.challengeArea}>
             {/* ヘッダー */}
-            <div style={{
-                background: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)',
-                borderRadius: '12px',
-                padding: '20px 24px',
-                marginBottom: '16px',
-                color: 'white'
-            }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                    <span style={{ fontSize: '1.5rem' }}>🏆</span>
-                    <h3 style={{ margin: 0, fontSize: '1.1rem' }}>{challenge.title}</h3>
+            <div className={styles.header}>
+                <div className={styles.headerTop}>
+                    <span className={styles.headerIcon}>🏆</span>
+                    <h3 className={styles.headerTitle}>{challenge.title}</h3>
                 </div>
-                <p style={{ margin: 0, fontSize: '0.9rem', opacity: 0.9 }}>
+                <p className={styles.headerDescription}>
                     {challenge.description}
                 </p>
             </div>
 
             {/* エディタ */}
-            <div style={{
-                borderRadius: '12px',
-                overflow: 'hidden',
-                border: '2px solid #334155',
-                marginBottom: '12px'
-            }}>
-                <div style={{
-                    background: '#1e1e1e',
-                    padding: '8px 16px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    borderBottom: '1px solid #334155'
-                }}>
-                    <div style={{ display: 'flex', gap: '6px' }}>
-                        <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#ef4444' }} />
-                        <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#eab308' }} />
-                        <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#22c55e' }} />
+            <div className={styles.editorWrapper}>
+                <div className={styles.editorToolbar}>
+                    <div className={styles.editorDots}>
+                        <span className={styles.dotRed} />
+                        <span className={styles.dotYellow} />
+                        <span className={styles.dotGreen} />
                     </div>
-                    <span style={{ color: '#94a3b8', fontSize: '0.8rem' }}>
+                    <span className={styles.editorLabel}>
                         TypeScript React
                     </span>
                 </div>
@@ -148,62 +126,29 @@ function ChallengeArea({ stepId, onComplete }: ChallengeAreaProps) {
             </div>
 
             {/* アクションボタン */}
-            <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', flexWrap: 'wrap' }}>
+            <div className={styles.actions}>
                 <button
                     onClick={isSubmitting ? undefined : checkCode}
                     disabled={isSubmitting}
-                    style={{
-                        padding: '10px 24px',
-                        background: isSubmitting ? '#94a3b8' : '#4f46e5',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '8px',
-                        cursor: isSubmitting ? 'not-allowed' : 'pointer',
-                        fontWeight: 'bold',
-                        fontSize: '0.9rem'
-                    }}
+                    className={isSubmitting ? styles.btnCheckDisabled : styles.btnCheck}
                 >
                     {isSubmitting ? '⏳ チェック中...' : '▶️ コードチェック'}
                 </button>
                 <button
                     onClick={showNextHint}
-                    style={{
-                        padding: '10px 16px',
-                        background: '#f59e0b',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '8px',
-                        cursor: 'pointer',
-                        fontSize: '0.9rem'
-                    }}
+                    className={styles.btnHint}
                 >
                     💡 ヒント ({showHints ? `${hintIndex + 1}/${challenge.hints.length}` : '?'})
                 </button>
                 <button
                     onClick={() => setShowSolution(!showSolution)}
-                    style={{
-                        padding: '10px 16px',
-                        background: showSolution ? '#6366f1' : '#64748b',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '8px',
-                        cursor: 'pointer',
-                        fontSize: '0.9rem'
-                    }}
+                    className={showSolution ? styles.btnSolutionActive : styles.btnSolution}
                 >
                     {showSolution ? '📖 解答を隠す' : '📖 解答を見る'}
                 </button>
                 <button
                     onClick={resetCode}
-                    style={{
-                        padding: '10px 16px',
-                        background: '#ef4444',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '8px',
-                        cursor: 'pointer',
-                        fontSize: '0.9rem'
-                    }}
+                    className={styles.btnReset}
                 >
                     🔄 リセット
                 </button>
@@ -211,18 +156,12 @@ function ChallengeArea({ stepId, onComplete }: ChallengeAreaProps) {
 
             {/* ヒント表示 */}
             {showHints && (
-                <div style={{
-                    background: '#fffbeb',
-                    border: '1px solid #fbbf24',
-                    borderRadius: '8px',
-                    padding: '12px 16px',
-                    marginBottom: '12px'
-                }}>
-                    <h4 style={{ margin: '0 0 8px', color: '#b45309', fontSize: '0.9rem' }}>
+                <div className={styles.hintBox}>
+                    <h4 className={styles.hintTitle}>
                         💡 ヒント
                     </h4>
                     {challenge.hints.slice(0, hintIndex + 1).map((hint, i) => (
-                        <p key={i} style={{ margin: '4px 0', fontSize: '0.85rem', color: '#92400e' }}>
+                        <p key={i} className={styles.hintItem}>
                             {i + 1}. {hint}
                         </p>
                     ))}
@@ -231,26 +170,12 @@ function ChallengeArea({ stepId, onComplete }: ChallengeAreaProps) {
 
             {/* 結果表示 */}
             {result && (
-                <div style={{
-                    background: result.passed ? '#f0fdf4' : '#fef2f2',
-                    border: `2px solid ${result.passed ? '#22c55e' : '#ef4444'}`,
-                    borderRadius: '12px',
-                    padding: '16px',
-                    marginBottom: '12px'
-                }}>
-                    <h4 style={{
-                        margin: '0 0 8px',
-                        color: result.passed ? '#15803d' : '#dc2626',
-                        fontSize: '1rem'
-                    }}>
+                <div className={result.passed ? styles.resultPassed : styles.resultFailed}>
+                    <h4 className={result.passed ? styles.resultTitlePassed : styles.resultTitleFailed}>
                         {result.passed ? '🎉 素晴らしい！全てのチェックポイントをクリアしました！' : '🔍 チェック結果'}
                     </h4>
                     {result.details.map((detail, i) => (
-                        <p key={i} style={{
-                            margin: '4px 0',
-                            fontSize: '0.85rem',
-                            color: detail.startsWith('✅') ? '#15803d' : '#dc2626'
-                        }}>
+                        <p key={i} className={detail.startsWith('✅') ? styles.detailPassed : styles.detailFailed}>
                             {detail}
                         </p>
                     ))}
@@ -259,19 +184,8 @@ function ChallengeArea({ stepId, onComplete }: ChallengeAreaProps) {
 
             {/* 模範解答 */}
             {showSolution && (
-                <div style={{
-                    borderRadius: '12px',
-                    overflow: 'hidden',
-                    border: '2px solid #6366f1',
-                    marginBottom: '12px'
-                }}>
-                    <div style={{
-                        background: '#6366f1',
-                        padding: '8px 16px',
-                        color: 'white',
-                        fontSize: '0.85rem',
-                        fontWeight: 'bold'
-                    }}>
+                <div className={styles.solutionWrapper}>
+                    <div className={styles.solutionHeader}>
                         📖 模範解答
                     </div>
                     <CodeEditor

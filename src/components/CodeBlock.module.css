@@ -1,0 +1,100 @@
+.codeBlockWrapper {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 20px;
+}
+
+.codeBlockHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: #1a1a2e;
+  border-bottom: 1px solid #2d2d44;
+}
+
+.codeBlockLang {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--teal-400);
+  background: rgba(20, 184, 166, 0.15);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.05em;
+}
+
+.codeCopyBtn {
+  background: transparent;
+  border: 1px solid #4a4a6a;
+  color: #a0a0b8;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.codeCopyBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-color: #6a6a8a;
+}
+
+.copied {
+  color: var(--success);
+  border-color: var(--success);
+}
+
+.codeBlockBody {
+  display: flex;
+  background: #1e1e2e;
+  overflow-x: auto;
+}
+
+.codeLineNumbers {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0;
+  background: #16162a;
+  border-right: 1px solid #2d2d44;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.codeLineNumbers span {
+  display: block;
+  padding: 0 12px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: #4a4a6a;
+  text-align: right;
+  min-width: 40px;
+}
+
+.codeBlockPre {
+  margin: 0;
+  padding: 16px;
+  flex: 1;
+  overflow-x: auto;
+  background: transparent !important;
+}
+
+.codeBlockPre code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  background: transparent !important;
+}
+
+@media (max-width: 768px) {
+  .codeBlockBody {
+    font-size: 0.85rem;
+  }
+
+  .codeLineNumbers {
+    display: none;
+  }
+}

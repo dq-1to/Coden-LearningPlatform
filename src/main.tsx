@@ -6,7 +6,7 @@ import { StatsProvider } from './context/StatsContext'
 import { AchievementProvider } from './context/AchievementContext'
 import { PtProvider } from './context/PtContext'
 import { MascotProvider } from './context/MascotContext'
-import './index.css'
+import './styles/global.css'
 import App from './App'
 
 createRoot(document.getElementById('root')!).render(
